@@ -1,0 +1,15 @@
+<OutOfBrowserSettings ShortName="Metro Alarm" EnableGPUAcceleration="True" ShowInstallMenuItem="True">
+  <OutOfBrowserSettings.Blurb>MetroAlarm Application on your desktop; at home, at work or on the go.</OutOfBrowserSettings.Blurb>
+  <OutOfBrowserSettings.WindowSettings>
+    <WindowSettings Title="Metro Alarm" Height="600" Width="800" WindowStyle="None" />
+  </OutOfBrowserSettings.WindowSettings>
+  <OutOfBrowserSettings.SecuritySettings>
+    <SecuritySettings ElevatedPermissions="Required" />
+  </OutOfBrowserSettings.SecuritySettings>
+  <OutOfBrowserSettings.Icons>
+    <Icon Size="16,16">Resources/Icons/ico16.png</Icon>
+    <Icon Size="32,32">Resources/Icons/ico32.png</Icon>
+    <Icon Size="48,48">Resources/Icons/ico48.png</Icon>
+    <Icon Size="128,128">Resources/Icons/ico128.png</Icon>
+  </OutOfBrowserSettings.Icons>
+</OutOfBrowserSettings>

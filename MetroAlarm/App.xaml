@@ -1,0 +1,26 @@
+﻿<Application xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="MetroAlarm.App"
+             >
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+            	<ResourceDictionary Source="Styles/BorderlessTextBox.xaml"/>
+                <ResourceDictionary Source="Styles/MetroStyleWindow.xaml"/>
+                
+            </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="WindowBackground">White</Color>
+            <SolidColorBrush x:Key="SolidWindowBg" Color="{StaticResource WindowBackground}"/>
+            <Color x:Key="Hinting">#FF00AEFF</Color>
+            <SolidColorBrush x:Key="SolidHint" Color="{StaticResource Hinting}"/>
+
+            <FontFamily x:Key="ThinFont">Segoe UI Light, Tahoma</FontFamily>
+            <FontFamily x:Key="RegFont">Segoe UI, Tahoma</FontFamily>
+            <DropShadowEffect x:Key="DropShadow" ShadowDepth="0" Opacity="0.4"/>
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

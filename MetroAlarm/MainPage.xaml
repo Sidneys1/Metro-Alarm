@@ -1,0 +1,215 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    xmlns:local="clr-namespace:MetroAlarm"
+    xmlns:controls="clr-namespace:MetroAlarm.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Windows.Controls.Input.Toolkit"
+    x:Class="MetroAlarm.MainPage"
+    mc:Ignorable="d"
+    d:DesignHeight="600" d:DesignWidth="800" Width="Auto" Height="Auto">
+
+    <UserControl.Resources>
+        <Storyboard x:Name="CloseFadeIn" Storyboard.TargetName="closeImage" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="0:0:0.3" From="0.5" To="1.0"/>
+        </Storyboard>
+        <Storyboard x:Name="CloseFadeOut" Storyboard.TargetName="closeImage" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.3" From="1" To=".5"/>
+        </Storyboard>
+        
+        <Storyboard x:Name="MinimizeFadeIn" Storyboard.TargetName="minimizeImage" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.3" From=".5" To="1"/>
+        </Storyboard>
+        <Storyboard x:Name="MinimizeFadeOut" Storyboard.TargetName="minimizeImage" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.3" From="1" To=".5"/>
+        </Storyboard>
+
+        <Storyboard x:Name="AlarmButtonFadeIn" Storyboard.TargetName="AlarmsButton" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.1" From=".25" To="1"/>
+        </Storyboard>
+        <Storyboard x:Name="AlarmButtonFadeOut" Storyboard.TargetName="AlarmsButton" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.1" From="1" To=".25"/>
+        </Storyboard>
+
+        <Storyboard x:Name="SettingsButtonFadeIn" Storyboard.TargetName="SettingsButton" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.1" From=".25" To="1"/>
+        </Storyboard>
+        <Storyboard x:Name="SettingsButtonFadeOut" Storyboard.TargetName="SettingsButton" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.1" From="1" To=".25"/>
+        </Storyboard>
+
+        <Storyboard x:Name="AlarmFadeIn" Storyboard.TargetName="AlarmFrame" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.1" From="0" To="1"/>
+        </Storyboard>
+        <Storyboard x:Name="AlarmFadeOut" Storyboard.TargetName="AlarmFrame" Storyboard.TargetProperty="Opacity" Completed="AlarmFadeOut_Completed">
+            <DoubleAnimation Duration="00:00:0.1" From="1" To="0"/>
+        </Storyboard>
+
+        <Storyboard x:Name="SettingsFadeIn" Storyboard.TargetName="SettingsFrame" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.1" From="0" To="1"/>
+        </Storyboard>
+        <Storyboard x:Name="SettingsFadeOut" Storyboard.TargetName="SettingsFrame" Storyboard.TargetProperty="Opacity" Completed="SettingsFadeOut_Completed">
+            <DoubleAnimation Duration="00:00:0.1" From="1" To="0"/>
+        </Storyboard>
+
+        <Storyboard x:Name="AddFadeIn" Storyboard.TargetName="AddBtn" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.3" From=".5" To="1"/>
+        </Storyboard>
+        <Storyboard x:Name="AddFadeOut" Storyboard.TargetName="AddBtn" Storyboard.TargetProperty="Opacity">
+            <DoubleAnimation Duration="00:00:0.3" From="1" To=".5"/>
+        </Storyboard>
+
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="White" Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6"/>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0" Grid.RowSpan="3" Grid.ColumnSpan="3" d:IsLocked="True"/>
+
+        <!-- #region Borders -->
+        
+        <Border x:Name="ResizeTop" BorderThickness="0" Margin="0" Cursor="SizeNS" Grid.Column="1" MouseLeftButtonDown="ResizeTop_MouseLeftButtonDown" d:IsLocked="True">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource Hinting}"/>
+            </Border.Background>
+        </Border>
+        <Border x:Name="ResizeBottom" BorderThickness="0" Margin="0,0,0,1" Grid.Row="2" Cursor="SizeNS" d:LayoutOverrides="GridBox" Grid.Column="1" MouseLeftButtonDown="ResizeBottom_MouseLeftButtonDown" d:IsLocked="True">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource WindowBackground}"/>
+            </Border.Background>
+        </Border>
+        <Border x:Name="ResizeRight" BorderThickness="0" Margin="0,0,1,0" Cursor="SizeWE" Grid.Column="2" Grid.Row="1" MouseLeftButtonDown="ResizeRight_MouseLeftButtonDown" d:IsLocked="True">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource WindowBackground}"/>
+            </Border.Background>
+        </Border>
+        <Border x:Name="ResizeLeft" BorderThickness="0" Margin="1,0,0,0" Cursor="SizeWE" Grid.Row="1" MouseLeftButtonDown="ResizeLeft_MouseLeftButtonDown" d:IsLocked="True">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource WindowBackground}"/>
+            </Border.Background>
+        </Border>
+        <Border x:Name="ResizeTopLeft" BorderThickness="0" Margin="0" Cursor="SizeNWSE" MouseLeftButtonDown="ResizeTopLeft_MouseLeftButtonDown" d:IsLocked="True">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource Hinting}"/>
+            </Border.Background>
+        </Border>
+        <Border x:Name="ResizeTopRight" BorderThickness="0" Margin="0" Cursor="SizeNESW" Grid.Column="2" MouseLeftButtonDown="ResizeTopRight_MouseLeftButtonDown" d:IsLocked="True">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource Hinting}"/>
+            </Border.Background>
+        </Border>
+        <Border x:Name="ResizeBottomLeft" BorderThickness="0" Margin="1,0,0,1" Grid.Row="2" Cursor="SizeNESW" d:LayoutOverrides="GridBox" MouseLeftButtonDown="ResizeBottomLeft_MouseLeftButtonDown" d:IsLocked="True">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource WindowBackground}"/>
+            </Border.Background>
+        </Border>
+        <Image x:Name="ResizeBottomRight" Margin="-7,-7,1,1" Grid.Row="2" Cursor="SizeNWSE" Grid.Column="2" d:LayoutOverrides="GridBox" Source="/Resources/grippy.png" Stretch="None" MouseLeftButtonDown="ResizeBottomRight_MouseLeftButtonDown" d:IsLocked="True"/>
+        
+        <!-- #endregion -->
+
+        <Grid x:Name="Content" Margin="0" d:LayoutOverrides="GridBox" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <!-- #region Titlebar -->
+            
+            <Grid x:Name="Titlebar" d:LayoutOverrides="Width" d:IsLocked="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <sdk:Label x:Name="Branding" HorizontalAlignment="Left" FontFamily="{StaticResource RegFont}" FontWeight="ExtraBold" Padding="0" Content="METRO ALARM" BorderThickness="0" HorizontalContentAlignment="Left" Margin="0,0,0,5" Height="20"/>
+                <Border BorderThickness="0" Margin="0" MouseLeftButtonDown="Dragger_MouseLeftButtonDown" Grid.Column="1">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource WindowBackground}"/>
+                    </Border.Background>
+                </Border>
+                <Image x:Name="closeImage" Stretch="None" Opacity="0.5" Cursor="Hand" Margin="0" Grid.Column="3" Source="/Resources/X.png" MouseEnter="closeImage_MouseEnter" MouseLeave="closeImage_MouseLeave" Width="20" Height="20" MouseLeftButtonUp="closeImage_MouseLeftButtonUp" Effect="{StaticResource DropShadow}"/>
+                <Image x:Name="minimizeImage" Source="/Resources/_.png" Stretch="None" Opacity="0.5" Margin="0" Grid.Column="2" Width="20" Height="20" MouseEnter="minimizeImage_MouseEnter" MouseLeave="minimizeImage_MouseLeave" MouseLeftButtonUp="minimizeImage_MouseLeftButtonUp" Cursor="Hand" Effect="{StaticResource DropShadow}"/>
+            </Grid>
+            
+            <!-- #endregion -->
+            
+            <!-- #region Navigation Bar -->
+            
+            <Grid x:Name="Navbar" Margin="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <sdk:Label x:Name="AlarmsButton" HorizontalAlignment="Left" Margin="0" Content="alarms" FontFamily="{StaticResource ThinFont}" FontSize="22" Padding="0,0,10,0" Cursor="Hand" MouseLeftButtonUp="AlarmsButton_MouseLeftButtonUp" Effect="{StaticResource DropShadow}"/>
+                <sdk:Label x:Name="SettingsButton" HorizontalAlignment="Left" Margin="0,0,10,0" Content="settings" FontFamily="{StaticResource ThinFont}" FontSize="22" Grid.Column="1" Cursor="Hand" Opacity="0.25" MouseLeftButtonUp="AlarmsButton_MouseLeftButtonUp" Effect="{StaticResource DropShadow}"/>
+                <Border BorderThickness="0" Margin="0" Grid.Column="2" Grid.ColumnSpan="1" MouseLeftButtonDown="Dragger_MouseLeftButtonDown">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource WindowBackground}"/>
+                    </Border.Background>
+                </Border>
+                <Image x:Name="AddBtn" Grid.Column="3" Stretch="None" Source="/Resources/add_small.png" Effect="{StaticResource DropShadow}" Opacity="0.5" Cursor="Hand" ToolTipService.ToolTip="Add a new Alarm" MouseLeftButtonDown="Image_MouseLeftButtonDown_1" HorizontalAlignment="Right" VerticalAlignment="Center" MouseEnter="AddBtn_MouseEnter" MouseLeave="AddBtn_MouseLeave"/>
+                <sdk:Label x:Name="InstallBtn" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Content="INSTALL" Cursor="Hand" ToolTipService.ToolTip="Install to your Computer to use Metro Alarm offline!" FontFamily="{StaticResource RegFont}" FontWeight="Bold" FontSize="12" BorderThickness="2" Padding="2,0" MouseLeftButtonUp="InstallBtn_MouseLeftButtonUp">
+                    <sdk:Label.BorderBrush>
+                        <SolidColorBrush Color="{StaticResource Hinting}"/>
+                    </sdk:Label.BorderBrush>
+                    <sdk:Label.Background>
+                        <SolidColorBrush Color="{StaticResource Hinting}"/>
+                    </sdk:Label.Background>
+                    <sdk:Label.Foreground>
+                        <SolidColorBrush Color="{StaticResource WindowBackground}"/>
+                    </sdk:Label.Foreground>
+                </sdk:Label>
+            </Grid>
+            
+            <!-- #endregion -->
+
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Padding="0" BorderBrush="{x:Null}" Margin="0">
+                <controls:ItemsControlWrapper x:Name="AlarmFrame" Margin="0,20,5,0" RemoveAlarm="AlarmFrame_RemoveAlarm" ItemsSource="{Binding}">
+                    <controls:ItemsControlWrapper.ItemTemplate>
+                        <DataTemplate>
+                            <controls:AlarmView/>
+                        </DataTemplate>
+                    </controls:ItemsControlWrapper.ItemTemplate>
+                </controls:ItemsControlWrapper>
+            </ScrollViewer>
+            
+            <Rectangle Grid.Row="2" Height="15" VerticalAlignment="Top" Margin="0,0,17,0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="White" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Grid.Row="2" Height="15" VerticalAlignment="Bottom" Margin="0,0,17,0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="Transparent"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Grid x:Name="SettingsFrame" Grid.Row="2" d:IsHidden="True">
+                <sdk:Label Margin="0" Content="Settings" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="{StaticResource ThinFont}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
