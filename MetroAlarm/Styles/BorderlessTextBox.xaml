@@ -128,13 +128,7 @@
 							<Grid>
 								<Border x:Name="ReadOnlyVisualElement" Background="#5EC9C9C9" Opacity="0"/>
 								<Border x:Name="MouseOverBorder" BorderBrush="Transparent" BorderThickness="1">
-									<ScrollViewer x:Name="ContentElement" BorderThickness="0" IsTabStop="False" Padding="{TemplateBinding Padding}">
-                                        <ScrollViewer.Style>
-                                            <Style TargetType="ScrollViewer">
-                                                <Setter Property="ScrollBar.Style" Value="{StaticResource ScrollBarTemplate}"/>
-                                            </Style>
-                                        </ScrollViewer.Style>
-                                    </ScrollViewer>
+									<ScrollViewer x:Name="ContentElement" BorderThickness="0" IsTabStop="False" Padding="{TemplateBinding Padding}"/>
 								</Border>
 							</Grid>
 						</Border>

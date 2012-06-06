@@ -12,11 +12,11 @@ using System.Windows.Shapes;
 
 namespace MetroAlarm.Controls
 {
-	public partial class ToggleSwitch : UserControl
-	{
-		public ToggleSwitch()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class NumUpDwn : UserControl
+    {
+        public NumUpDwn()
+        {
+            InitializeComponent();
+        }
+    }
 }

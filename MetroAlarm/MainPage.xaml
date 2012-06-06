@@ -6,7 +6,8 @@
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
     xmlns:local="clr-namespace:MetroAlarm"
     xmlns:controls="clr-namespace:MetroAlarm.Controls"
-    xmlns:toolkit="clr-namespace:Microsoft.Windows.Controls.Input.Toolkit"
+	xmlns:classes="clr-namespace:MetroAlarm.Classes"
+	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     x:Class="MetroAlarm.MainPage"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="800" Width="Auto" Height="Auto">
@@ -60,6 +61,10 @@
         <Storyboard x:Name="AddFadeOut" Storyboard.TargetName="AddBtn" Storyboard.TargetProperty="Opacity">
             <DoubleAnimation Duration="00:00:0.3" From="1" To=".5"/>
         </Storyboard>
+		
+		<Storyboard x:Name="SmoothScroll" Storyboard.TargetName="ScrollMediator" Storyboard.TargetProperty="ScrollableHeightMultiplier">
+			<DoubleAnimation x:Name="ScrollAmount" Duration="0:0:0.3" From="0" To="0.1"/>
+		</Storyboard>
 
     </UserControl.Resources>
     
@@ -164,7 +169,7 @@
                         <SolidColorBrush Color="{StaticResource WindowBackground}"/>
                     </Border.Background>
                 </Border>
-                <Image x:Name="AddBtn" Grid.Column="3" Stretch="None" Source="/Resources/add_small.png" Effect="{StaticResource DropShadow}" Opacity="0.5" Cursor="Hand" ToolTipService.ToolTip="Add a new Alarm" MouseLeftButtonDown="Image_MouseLeftButtonDown_1" HorizontalAlignment="Right" VerticalAlignment="Center" MouseEnter="AddBtn_MouseEnter" MouseLeave="AddBtn_MouseLeave"/>
+                <Image x:Name="AddBtn" Grid.Column="3" Stretch="None" Source="Resources/MetroIcon Add.png" Effect="{StaticResource DropShadow}" Opacity="0.5" Cursor="Hand" ToolTipService.ToolTip="Add a new Alarm" MouseLeftButtonDown="Image_MouseLeftButtonDown_1" HorizontalAlignment="Right" VerticalAlignment="Center" MouseEnter="AddBtn_MouseEnter" MouseLeave="AddBtn_MouseLeave"/>
                 <sdk:Label x:Name="InstallBtn" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Content="INSTALL" Cursor="Hand" ToolTipService.ToolTip="Install to your Computer to use Metro Alarm offline!" FontFamily="{StaticResource RegFont}" FontWeight="Bold" FontSize="12" BorderThickness="2" Padding="2,0" MouseLeftButtonUp="InstallBtn_MouseLeftButtonUp">
                     <sdk:Label.BorderBrush>
                         <SolidColorBrush Color="{StaticResource Hinting}"/>
@@ -181,15 +186,15 @@
             <!-- #endregion -->
 
             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Padding="0" BorderBrush="{x:Null}" Margin="0">
-                <controls:ItemsControlWrapper x:Name="AlarmFrame" Margin="0,20,5,0" RemoveAlarm="AlarmFrame_RemoveAlarm" ItemsSource="{Binding}">
-                    <controls:ItemsControlWrapper.ItemTemplate>
+                <classes:ItemsControlWrapper x:Name="AlarmFrame" Margin="0,20,5,0" RemoveAlarm="AlarmFrame_RemoveAlarm" ItemsSource="{Binding}">
+                    <classes:ItemsControlWrapper.ItemTemplate>
                         <DataTemplate>
                             <controls:AlarmView/>
                         </DataTemplate>
-                    </controls:ItemsControlWrapper.ItemTemplate>
-                </controls:ItemsControlWrapper>
+                    </classes:ItemsControlWrapper.ItemTemplate>
+                </classes:ItemsControlWrapper>
             </ScrollViewer>
-            
+			            
             <Rectangle Grid.Row="2" Height="15" VerticalAlignment="Top" Margin="0,0,17,0">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

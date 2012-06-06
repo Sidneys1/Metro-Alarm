@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MetroAlarm.Controls
+namespace MetroAlarm.Classes
 {
 	public class ItemsControlWrapper: ItemsControl
 	{
@@ -17,22 +17,22 @@ namespace MetroAlarm.Controls
 		protected override DependencyObject GetContainerForItemOverride()
 		{
 			//base.GetContainerForItemOverride();
-			return new AlarmView();
+			return new Controls.AlarmView();
 		}
 
 		protected override bool IsItemItsOwnContainerOverride(object item)
 		{
-			return (item is AlarmView);
+			return (item is Controls.AlarmView);
 		}
 
 		protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
 		{
 			base.PrepareContainerForItemOverride(element, item);
 
-			((AlarmView)element).RemoveAlarm += new EventHandler<Classes.AlarmArgs>(view_RemoveItem);
+			((Controls.AlarmView)element).RemoveAlarm += new EventHandler<AlarmArgs>(view_RemoveItem);
 		}
 
-		void view_RemoveItem(object sender, Classes.AlarmArgs e)
+		void view_RemoveItem(object sender, AlarmArgs e)
 		{
 			if (RemoveAlarm != null)
 				RemoveAlarm(sender, e);

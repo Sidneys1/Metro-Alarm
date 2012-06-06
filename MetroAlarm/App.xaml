@@ -9,6 +9,7 @@
                 
             	<ResourceDictionary Source="Styles/BorderlessTextBox.xaml"/>
                 <ResourceDictionary Source="Styles/MetroStyleWindow.xaml"/>
+                <ResourceDictionary Source="Styles/MetroToggleSwitch.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
             <Color x:Key="WindowBackground">White</Color>

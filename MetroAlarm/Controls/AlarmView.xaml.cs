@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace MetroAlarm.Controls
 {
@@ -43,12 +45,23 @@ namespace MetroAlarm.Controls
 		private void DeleteBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
 		{
 			ConfirmationDialog d = new ConfirmationDialog();
-			d.Show();
-			d.Closed += (send, args) =>
-				{
-					if (d.DialogResult == true)
-						FadeOut.Begin();
+
+            BlurEffect blur = new BlurEffect();
+            blur.Radius = 10;
+
+            Application.Current.RootVisual.Effect = blur;
+
+            d.Closed += (send, args) =>
+				{                
+                    Application.Current.RootVisual.Effect = null;
+
+                    if (d.DialogResult == true)
+                    {       
+                        FadeOut.Begin();
+                    }
 				};
+
+			d.Show();
 		}
 
 		private void FadeOut_Completed_1(object sender, EventArgs e)
