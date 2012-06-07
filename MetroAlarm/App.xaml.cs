@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 
 namespace MetroAlarm
@@ -27,6 +28,7 @@ namespace MetroAlarm
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
 			this.RootVisual = new MainPage();
+            this.RootVisual.Effect = (BlurEffect)this.Resources["BlurEffect"];
 		}
 
 		private void Application_Exit(object sender, EventArgs e)

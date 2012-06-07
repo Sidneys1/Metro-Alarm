@@ -23,8 +23,12 @@
             <FontFamily x:Key="RegFont">Segoe UI, Tahoma</FontFamily>
             <DropShadowEffect x:Key="DropShadow" ShadowDepth="0" Opacity="0.4"/>
 
-            <BlurEffect x:Key="BlurEffect" Radius="0" />  
-        </ResourceDictionary>
+            <BlurEffect x:Key="BlurEffect" Radius="0" />
+			<LinearGradientBrush x:Key="ShadowGradient" EndPoint="0.5,1" StartPoint="0.5,0">
+				<GradientStop Color="#FFB0B0B0"/>
+				<GradientStop Color="Transparent" Offset="1"/>
+			</LinearGradientBrush>
+		</ResourceDictionary>
 
     </Application.Resources>
 </Application>

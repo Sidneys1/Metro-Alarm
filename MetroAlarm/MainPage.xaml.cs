@@ -34,11 +34,25 @@ namespace MetroAlarm
 
 			Alarms = new ObservableCollection<Classes.Alarm>();
 
-			Alarms.Add(new Classes.Alarm("Wake up my ChickPea!") { Enabled = true, alarmTime = new Classes.Time(7,30,00), Desc = "She is wonderful and deserves a loving wakeup call... :)" });
-			Alarms.Add(new Classes.Alarm("Arise! Seize the Day! Carpe Diem!!"));
+			Alarms.Add(new Classes.Alarm("Wake up my ChickPea!") { Enabled = true, AlarmTime = new Classes.Time(7,30,00), Desc = "She is wonderful and deserves a loving wakeup call... :)" });
+            Alarms.Add(new Classes.Alarm("Arise! Seize the Day! Carpe Diem!!") { Enabled = true });
 
 			AlarmFrame.DataContext = Alarms;
+
+            System.Windows.Threading.DispatcherTimer Checker = new System.Windows.Threading.DispatcherTimer();
+            Checker.Interval = new TimeSpan(0, 0, 31);
+            Checker.Tick += Checker_Tick;
+            Checker.Start();
 		}
+
+        void Checker_Tick(object sender, EventArgs e)
+        {
+            foreach (Classes.Alarm alarm in Alarms)
+            {
+                if (alarm.Enabled && alarm.AlarmTime.Hour == DateTime.Now.Hour && alarm.AlarmTime.Minute == DateTime.Now.Minute)
+                    alarm.Desc += "Alarm!";
+            }
+        }
 
 		#region Titlebar
 

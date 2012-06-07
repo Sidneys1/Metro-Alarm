@@ -12,7 +12,18 @@ namespace MetroAlarm.Classes
 
 		#region Declarations
 
-		public int Hour;
+        int hour;
+        public int Hour
+        {
+            get { return hour; }
+            set 
+            {
+                if (value < 24)
+                    hour = value;
+                else
+                    hour = value % 24;
+            }
+        }
 		public int Minute;
 		public int Second;
 
@@ -226,8 +237,21 @@ namespace MetroAlarm.Classes
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
-		{		
-			return String.Format("{0:0}:{1:00}", Hour, Minute);
+		{
+            int h = Hour;
+            bool pm = false;
+            if (Hour == 0)
+            {
+                h = 12;
+                pm = true;
+            }
+            else if (Hour > 12)
+            {
+                h = Hour - 12;
+                pm = true;
+            }
+
+			return String.Format("{0:0}:{1:00} {2}", h, Minute, pm ? "pm" : "am");
 		}
 
 		/// <summary>

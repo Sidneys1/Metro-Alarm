@@ -100,7 +100,7 @@
                 <local:CheckLabel x:Name="SettingsButton" Grid.Column="1" Text="settings" HorizontalAlignment="Left" FontFamily="{StaticResource ThinFont}" FontSize="22" CheckChanged="SettingsButton_CheckChanged"/>
 
                 <Border BorderThickness="0" Margin="0" Grid.Column="2" Grid.ColumnSpan="1" MouseLeftButtonDown="Dragger_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
-				<Button Grid.Column="3" Cursor="Hand" ToolTipService.ToolTip="Add a new Alarm" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MetroFadingButton}" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" Click="AddBtn_Click">
+				<Button Grid.Column="3" Cursor="Hand" ToolTipService.ToolTip="Add a new Alarm" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MetroFadingButton}" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" Click="AddBtn_Click" Background="{StaticResource SolidWindowBg}">
                     <Image Stretch="None" Source="Resources/MetroIcon Add.png" Effect="{StaticResource DropShadow}"/>
                 </Button>
                 <sdk:Label x:Name="InstallBtn" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Content="INSTALL" Cursor="Hand" ToolTipService.ToolTip="Install to your Computer to use Metro Alarm offline!" FontFamily="{StaticResource RegFont}" FontWeight="Bold" FontSize="12" BorderThickness="2" Padding="2,0" MouseLeftButtonUp="InstallBtn_MouseLeftButtonUp" BorderBrush="{StaticResource SolidHint}" Foreground="{StaticResource SolidWindowBg}" Background="{StaticResource SolidHint}"/>

@@ -15,6 +15,8 @@ namespace MetroAlarm.Controls
 		{
 			InitializeComponent();
 			Storyboard.SetTarget(HeightMod, this);
+            Storyboard.SetTarget(BlurAnimIn, blur);
+            Storyboard.SetTarget(BlurAnimOut, blur);
 			FadeIn.Begin();
 		}
 
@@ -24,30 +26,9 @@ namespace MetroAlarm.Controls
 				RemoveAlarm(this, new Classes.AlarmArgs(this.DataContext as Classes.Alarm));
 		}
 
-        private void AlarmTime_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            TimeEditor editor = new TimeEditor();
-
-            FadeOutBlur.Stop();
-            FadeInBlur.Stop();
-
-            editor.Closed += (send, args) =>
-                {
-                    FadeOutBlur.Begin();
-                    if (editor.DialogResult == true)
-                    { 
-                        //Do something...
-                    }
-                };
-            FadeInBlur.Begin();
-            editor.Show();
-        }
-
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
 			ConfirmationDialog d = new ConfirmationDialog();
-
-            blur.Radius = 0;
 
             FadeOutBlur.Stop();
             FadeInBlur.Stop();
@@ -64,6 +45,25 @@ namespace MetroAlarm.Controls
 
             FadeInBlur.Begin();
 			d.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            TimeEditor editor = new TimeEditor((this.DataContext as Classes.Alarm).AlarmTime);
+
+            FadeOutBlur.Stop();
+            FadeInBlur.Stop();
+
+            editor.Closed += (send, args) =>
+            {
+                FadeOutBlur.Begin();
+                if (editor.DialogResult == true)
+                {
+                    (this.DataContext as Classes.Alarm).AlarmTime = editor.ReturnTime;
+                }
+            };
+            FadeInBlur.Begin();
+            editor.Show();
         }
 	}
 }

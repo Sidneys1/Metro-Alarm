@@ -14,13 +14,33 @@ namespace MetroAlarm.Controls
 {
 	public partial class TimeEditor : ChildWindow
 	{
-		public TimeEditor()
+        public Classes.Time ReturnTime = null;
+
+		public TimeEditor(Classes.Time args = null)
 		{
 			InitializeComponent();
+            if (args != null)
+            {
+                if (args.Hour > 12)
+                {
+                    HrUpDwn.Value = args.Hour - 12;
+                    PM.isChecked = true;
+                }
+                else if (args.Hour == 0)
+                {
+                    HrUpDwn.Value = 12;
+                    PM.isChecked = true;
+                }
+                else
+                    HrUpDwn.Value = args.Hour;
+                Min10UpDwn.Value = args.Minute / 10;
+                Min1UpDwn.Value = args.Minute % 10;
+            }
 		}
 
 		private void OKButton_Click(object sender, RoutedEventArgs e)
 		{
+            ReturnTime = new Classes.Time(HrUpDwn.Value + (PM.isChecked ? 12 : 0), Min10UpDwn.Value * 10 + Min1UpDwn.Value, 0);
 			this.DialogResult = true;
 		}
 

@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
 
         <Button x:Name="CancelButton" Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,6,0,0" Grid.Row="1" BorderBrush="{x:Null}" Background="{StaticResource SolidWindowBg}" Padding="3" ToolTipService.ToolTip="Cancel" Cursor="Hand" BorderThickness="0" Style="{StaticResource MetroFadingButton}" >
-        	<Image Source="/Resources/MetroIcon X.png" Stretch="None" RenderTransformOrigin="0.5,0.5" ToolTipService.ToolTip="" Effect="{StaticResource DropShadow}">
+        	<Image Source="/Resources/MetroIcon X.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Effect="{StaticResource DropShadow}">
         		<Image.RenderTransform>
         			<CompositeTransform/>
         		</Image.RenderTransform>

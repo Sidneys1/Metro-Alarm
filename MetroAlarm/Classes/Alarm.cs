@@ -1,23 +1,48 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace MetroAlarm.Classes
 {
 	public delegate void AlarmEvent(AlarmArgs e);
 
-	public class Alarm
+	public class Alarm : INotifyPropertyChanged
 	{
-		public Time alarmTime { get; set; }
+        Time _alarmTime;
+		public Time AlarmTime 
+        {
+            get { return _alarmTime; }
+            set
+            {
+                _alarmTime = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("AlarmTime"));
+            }
+        }
+
 		public string Name { get; set; }
-		public string Desc { get; set; }
+
+        string _desc;
+        public string Desc
+        {
+            get { return _desc; }
+            set 
+            {
+                _desc = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Desc"));
+            }
+        }
 		public bool Enabled { get; set; }
 
 		public Alarm(string n) 
 		{ 
 			Name = n;
 			Desc = "";
-			alarmTime = new Time();
+			AlarmTime = new Time();
 		}
-	}
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
 
 	public class AlarmArgs : EventArgs
 	{

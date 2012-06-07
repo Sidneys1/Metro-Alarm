@@ -7,7 +7,7 @@
     xmlns:convert="clr-namespace:MetroAlarm.Converters"
     xmlns:TS="clr-namespace:ToggleSwitch;assembly=ToggleSwitch"
     mc:Ignorable="d"
-    d:DesignHeight="142" d:DesignWidth="493">
+    d:DesignHeight="120	" d:DesignWidth="500" MaxHeight="120">
 
     <UserControl.Resources>
         <Storyboard x:Name="FadeOut" Completed="FadeOut_Completed_1">
@@ -32,12 +32,12 @@
             </DoubleAnimation>
         </Storyboard>
 
-        <Storyboard x:Name="FadeInBlur" Storyboard.TargetProperty="Radius" Storyboard.TargetName="{Binding BlurEffect}">
-            <DoubleAnimation x:Name="BlurAnimIn"  Duration="0:0:0.5" From="0" To="10"/>
+        <Storyboard x:Name="FadeInBlur" Storyboard.TargetProperty="Radius">
+            <DoubleAnimation x:Name="BlurAnimIn"  Duration="0:0:0.5" From="0" To="5"/>
         </Storyboard>
         
-        <Storyboard x:Name="FadeOutBlur" Storyboard.TargetProperty="Radius" Storyboard.TargetName="{Binding BlurEffect}">
-            <DoubleAnimation x:Name="BlurAnimOut"  Duration="0:0:0.5" From="10" To="0"/>
+        <Storyboard x:Name="FadeOutBlur" Storyboard.TargetProperty="Radius">
+            <DoubleAnimation x:Name="BlurAnimOut"  Duration="0:0:0.5" From="5" To="0"/>
         </Storyboard>
     </UserControl.Resources>
     
@@ -49,7 +49,7 @@
             <SolidColorBrush Color="Gray"/>
         </Border.BorderBrush>
         
-        <Grid MinHeight="120" MaxHeight="120">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -63,14 +63,19 @@
                 <convert:DateFormatter x:Key="FormatConverter"/>
             </Grid.Resources>
 
-            <TextBox x:Name="NameEditBox" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource RegFont}" FontWeight="Bold" FontSize="16" Text="{Binding Name, FallbackValue=&lt;Error&gt;, Mode=TwoWay, TargetNullValue=&lt;Error&gt;, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" Foreground="{StaticResource SolidHint}" BorderBrush="{x:Null}" SelectionBackground="{StaticResource SolidHint}" SelectionForeground="{StaticResource SolidWindowBg}" BorderThickness="0" Cursor="IBeam" Style="{StaticResource BorderlessTextBox}" Padding="0" ToolTipService.ToolTip="Alarm Title"/>
+            <TextBox x:Name="NameEditBox" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontFamily="{StaticResource RegFont}" FontWeight="Bold" FontSize="16" Text="{Binding Name, FallbackValue=&lt;Error&gt;, Mode=TwoWay, TargetNullValue=&lt;Error&gt;, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" Foreground="{StaticResource SolidHint}" BorderBrush="{x:Null}" SelectionBackground="{StaticResource SolidHint}" SelectionForeground="{StaticResource SolidWindowBg}" BorderThickness="0" Cursor="IBeam" Style="{StaticResource BorderlessTextBox}" Padding="0" ToolTipService.ToolTip="Edit Alarm Title"/>
 
-            <TextBox Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Desc, FallbackValue=&lt;Error&gt;, Mode=TwoWay, TargetNullValue=&lt;Error&gt;, UpdateSourceTrigger=PropertyChanged}" Foreground="#FF575757" TextWrapping="Wrap" FontFamily="{StaticResource RegFont}" FontSize="14" ToolTipService.ToolTip="Alarm Notes" AcceptsReturn="True" Cursor="IBeam" VerticalScrollBarVisibility="Auto" BorderBrush="{x:Null}" SelectionBackground="{StaticResource SolidHint}" SelectionForeground="{StaticResource SolidWindowBg}" Style="{StaticResource BorderlessTextBox}" Padding="0" BorderThickness="0"/>
+            <TextBox Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Desc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="#FF575757" TextWrapping="Wrap" FontFamily="{StaticResource RegFont}" FontSize="14" ToolTipService.ToolTip="Alarm Notes" AcceptsReturn="True" Cursor="IBeam" VerticalScrollBarVisibility="Auto" BorderBrush="{x:Null}" SelectionBackground="{StaticResource SolidHint}" SelectionForeground="{StaticResource SolidWindowBg}" Style="{StaticResource BorderlessTextBox}" Margin="10,0" BorderThickness="0"/>
+			<StackPanel Orientation="Horizontal" Grid.Row="2">
 
-            <TextBlock x:Name="AlarmTime" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Left" Text="{Binding alarmTime, Mode=OneWay, Converter={StaticResource FormatConverter}, ConverterParameter=\{0:t\}}" FontFamily="{StaticResource ThinFont}" FontSize="32" TextTrimming="WordEllipsis" ToolTipService.ToolTip="Alarm Time" Cursor="Hand" MouseLeftButtonUp="AlarmTime_MouseLeftButtonUp"/>
+				<TextBlock x:Name="AlarmTime" VerticalAlignment="Stretch" HorizontalAlignment="Left" Text="{Binding AlarmTime, ConverterParameter=\{0:t\}, Converter={StaticResource FormatConverter}, FallbackValue=Bla}" FontFamily="{StaticResource ThinFont}" FontSize="32" TextTrimming="WordEllipsis" ToolTipService.ToolTip="Alarm Time"/>
+				<Button Style="{StaticResource MetroFadingButton}" Background="{StaticResource SolidWindowBg}" BorderBrush="{x:Null}" BorderThickness="0" VerticalAlignment="Bottom" Click="Button_Click_1" Cursor="Hand" ToolTipService.ToolTip="Edit Alarm..." Margin="10,0,0,5">
+					<Image Source="/Resources/MetroIcon Pencil.png" Width="20" Height="20"/>
+				</Button>
+			</StackPanel>
 
-            <TS:HorizontalToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding Enabled}" ThumbBrush="{StaticResource SolidWindowBg}" BorderBrush="#FFA8A8A8" FontFamily="{StaticResource ThinFont}" UncheckedBackground="#FF890000" CheckedBackground="#FF006300" ToolTipService.ToolTip="Enable/Disable Alarm" CheckedForeground="{StaticResource SolidWindowBg}" UncheckedForeground="{StaticResource SolidWindowBg}" Style="{StaticResource MetroToggleSwitch}"/>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="3" Height="35" Margin="0,-6,-6,0">
+			<TS:HorizontalToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding Enabled, BindsDirectlyToSource=True, Mode=TwoWay}" ThumbBrush="{StaticResource SolidWindowBg}" BorderBrush="#FFA8A8A8" FontFamily="{StaticResource ThinFont}" UncheckedBackground="#FF890000" CheckedBackground="#FF006300" ToolTipService.ToolTip="Enable/Disable Alarm" CheckedForeground="{StaticResource SolidWindowBg}" UncheckedForeground="{StaticResource SolidWindowBg}" Style="{StaticResource MetroToggleSwitch}"/>
+            <Rectangle Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="1" Height="35" Margin="0,-6,-6,0">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.5">
                         <GradientStop Color="{StaticResource WindowBackground}"/>
@@ -78,7 +83,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="35" Height="3" Margin="0,-6,-6,0">
+            <Rectangle Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="35" Height="1" Margin="0,-6,-6,0">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.5">
                         <LinearGradientBrush.RelativeTransform>
@@ -89,9 +94,9 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Button Grid.Column="1" HorizontalAlignment="Right" Margin="0,-10,-10,0" VerticalAlignment="Top" Cursor="Hand" ToolTipService.ToolTip="Delete Alarm" BorderBrush="{x:Null}" Style="{StaticResource MetroFadingButton}" BorderThickness="0" Padding="0" Click="DeleteBtn_Click">
+            <Button Grid.Column="1" HorizontalAlignment="Right" Margin="0,-10,-10,0" VerticalAlignment="Top" Cursor="Hand" ToolTipService.ToolTip="Delete Alarm..." BorderBrush="{x:Null}" Style="{StaticResource MetroFadingButton}" BorderThickness="0" Padding="0" Click="DeleteBtn_Click" Background="Transparent">
                 <Image  Source="/Resources/MetroIcon Trash.png" Stretch="None" Effect="{StaticResource DropShadow}"/>
             </Button>
-        </Grid>
+		</Grid>
     </Border>
 </UserControl>

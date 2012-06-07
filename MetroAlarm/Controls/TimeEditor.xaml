@@ -18,22 +18,41 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Button x:Name="CancelButton" Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,6,0,0" Grid.Row="1" Background="{StaticResource SolidWindowBg}" BorderBrush="{x:Null}" Foreground="Black" Style="{StaticResource MetroFadingButton}">
+        <Button x:Name="CancelButton" Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,6,0,0" Grid.Row="1" Background="{StaticResource SolidWindowBg}" BorderBrush="{x:Null}" Foreground="Black" Style="{StaticResource MetroFadingButton}" ToolTipService.ToolTip="Cancel" Cursor="Hand">
         	<Image Source="/Resources/MetroIcon X.png" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource DropShadow}" />
 		</Button>
-        <Button x:Name="OKButton" Click="OKButton_Click" HorizontalAlignment="Right" Margin="0,6,40,0" Grid.Row="1" Background="{StaticResource SolidWindowBg}" BorderBrush="{x:Null}" Foreground="{x:Null}" Style="{StaticResource MetroFadingButton}" >
+        <Button x:Name="OKButton" Click="OKButton_Click" HorizontalAlignment="Right" Margin="0,6,40,0" Grid.Row="1" Background="{StaticResource SolidWindowBg}" BorderBrush="{x:Null}" Foreground="{x:Null}" Style="{StaticResource MetroFadingButton}" ToolTipService.ToolTip="Accept" Cursor="Hand" >
         	<Image Source="/Resources/MetroIcon Check.png" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource DropShadow}"/>
       
 		</Button>
         <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-        	<Border HorizontalAlignment="Left" BorderThickness="1,0,1,1" BorderBrush="{StaticResource SolidHint}">
-        		<local:NumUpDwn BorderThickness="1" Height="100" Width="25"/>
+        	<Border HorizontalAlignment="Left" BorderThickness="1,1,0,1" BorderBrush="{StaticResource SolidHint}">
+        		<local:NumUpDwn x:Name="HrUpDwn" BorderThickness="1,1,0,1" Height="100" Width="30" MaxValue="12" MinValue="1"/>
         	</Border>
-        	<sdk:Label HorizontalAlignment="Center" Width="15" Content=":" FontFamily="{StaticResource ThinFont}" FontSize="64" HorizontalContentAlignment="Center" VerticalAlignment="Center" Padding="0,0,0,14"/>
-        	<Border Height="101" Width="50" BorderThickness="1" BorderBrush="{StaticResource SolidHint}">
+			<Border BorderThickness="0,1" BorderBrush="{StaticResource SolidHint}">
+
+				<Grid Height="100" >
+					<Grid.RowDefinitions>
+						<RowDefinition Height="0.37*"/>
+						<RowDefinition Height="0.25*"/>
+						<RowDefinition Height="0.37*"/>
+					</Grid.RowDefinitions>
+
+					<Rectangle Fill="{StaticResource ShadowGradient}" StrokeThickness="0"/>
+					<Rectangle Grid.Row="1" Fill="{StaticResource SolidHint}" StrokeThickness="0"/>
+					<Rectangle Grid.Row="2" Fill="{StaticResource ShadowGradient}" StrokeThickness="0" RenderTransformOrigin="0.5,0.5">
+						<Rectangle.RenderTransform>
+							<CompositeTransform ScaleY="-1"/>
+						</Rectangle.RenderTransform>
+					</Rectangle>
+					<sdk:Label Grid.Row="1"  FontFamily="{StaticResource ThinFont}" HorizontalContentAlignment="Center"  Content=":" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource SolidWindowBg}" FontSize="18"/>
+
+				</Grid>
+			</Border>
+			<Border Width="40" BorderThickness="0,1,1,1" BorderBrush="{StaticResource SolidHint}">
         		<Grid>
-        			<local:NumUpDwn HorizontalAlignment="Left" d:LayoutOverrides="Height"/>
-        			<local:NumUpDwn HorizontalAlignment="Right" d:LayoutOverrides="Height"/>
+        			<local:NumUpDwn x:Name="Min10UpDwn" Width="20" HorizontalAlignment="Left" d:LayoutOverrides="Height" MaxValue="5" MinValue="0"/>
+        			<local:NumUpDwn x:Name="Min1UpDwn" Width="20" HorizontalAlignment="Right" d:LayoutOverrides="Height" MaxValue="9" MinValue="0"/>
         		</Grid>
         	</Border>
         	<Grid Height="100" Margin="20,0,0,0" Width="41">

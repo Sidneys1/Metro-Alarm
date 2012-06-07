@@ -3,43 +3,98 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="MetroAlarm.Controls.NumUpDwn"
-    mc:Ignorable="d"
-    d:DesignHeight="100" d:DesignWidth="50" MinWidth="25" MinHeight="100" MaxWidth="100" MaxHeight="100">
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" xmlns:Anno="http://schemas.microsoft.com/expression/blend/extensions/annotations/2008" x:Name="userControl" x:Class="MetroAlarm.Controls.NumUpDwn"
+    mc:Ignorable="d Anno"
+    d:DesignHeight="100" d:DesignWidth="20" MinWidth="20" MinHeight="100" MaxWidth="100" MaxHeight="100">
 	<UserControl.Resources>
-		<LinearGradientBrush x:Key="ShadowBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-			<GradientStop Color="#FF959595"/>
-			<GradientStop Color="Transparent" Offset="1"/>
-		</LinearGradientBrush>
+		<Storyboard x:Name="UpOut" Completed="UpOut_Completed">
+			<DoubleAnimation Duration="0:0:0.3" To="-24" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="label" d:IsOptimized="True">
+				<DoubleAnimation.EasingFunction>
+					<BackEase Amplitude="0.5" EasingMode="EaseIn"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+			<DoubleAnimation Duration="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="DownIn">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="label">
+				<EasingDoubleKeyFrame KeyTime="0" Value="24"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseOut" Amplitude="0.5"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Name="DownOut" Completed="DownOut_Completed">
+			<DoubleAnimation Duration="0:0:0.3" To="24" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="label" d:IsOptimized="True">
+				<DoubleAnimation.EasingFunction>
+					<BackEase Amplitude="0.5" EasingMode="EaseIn"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+			<DoubleAnimation Duration="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label" d:IsOptimized="True"/>
+		</Storyboard>
+		<Storyboard x:Name="UpIn">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="label">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="label">
+				<EasingDoubleKeyFrame KeyTime="0" Value="-24"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseOut" Amplitude="0.5"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
 	</UserControl.Resources>
+    
+	<Anno:AnnotationManager.Annotations>
+		<Anno:Annotation AuthorInitials="SMB" Author="Sidney Matthew Borne" Left="64.166" SerialNumber="1" Top="26.444" Timestamp="06/07/2012 01:33:38" Text="This thing is ridiculous..."/>
+	</Anno:AnnotationManager.Annotations>
     
 	<Grid x:Name="LayoutRoot" Background="White" OpacityMask="White">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="Mouse"/>
 		</VisualStateManager.VisualStateGroups>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="0.5*"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="0.5*"/>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="0.37*"/>
+			<RowDefinition Height="0.25*"/>
+			<RowDefinition Height="0.37*"/>
 		</Grid.RowDefinitions>
-		<Border Grid.Row="2" Background="{StaticResource SolidHint}">
-			<sdk:Label Grid.Row="2" Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource SolidWindowBg}"/>
+		<Border Grid.Row="1" Background="{StaticResource SolidHint}">
+			<sdk:Label x:Name="label" Content="{Binding Value, ElementName=userControl, Mode=OneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource SolidWindowBg}" FontFamily="{StaticResource ThinFont}" FontSize="18" RenderTransformOrigin="0.5,0.5">
+				<sdk:Label.RenderTransform>
+					<CompositeTransform/>
+				</sdk:Label.RenderTransform>
+			</sdk:Label>
 		</Border>
-		<Rectangle Grid.RowSpan="2" Fill="{StaticResource ShadowBrush}"/>
-		<Rectangle  Grid.Row="3" Grid.RowSpan="2" Fill="{StaticResource ShadowBrush}" RenderTransformOrigin="0.5,0.5">
+		<Rectangle Fill="{StaticResource ShadowGradient}"/>
+		<Rectangle  Grid.Row="2" Fill="{StaticResource ShadowGradient}" RenderTransformOrigin="0.5,0.5">
 			<Rectangle.RenderTransform>
 				<CompositeTransform ScaleY="-1"/>
 			</Rectangle.RenderTransform>
 		</Rectangle>
-
-		<sdk:Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<sdk:Label Grid.Row="4" Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-			<sdk:Label.Projection>
-				<PlaneProjection CenterOfRotationY="1"/>
-			</sdk:Label.Projection>
-		</sdk:Label>
+		<Button Style="{StaticResource MetroFadingButton}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Click="Button_Click_1" Padding="0">
+			<Image VerticalAlignment="Center" Source="/Resources/MetroIcon Arrow.png" 
+				RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="17" Height="17">
+				<Image.RenderTransform>
+					<CompositeTransform Rotation="270"/>
+				</Image.RenderTransform>
+			</Image>
+		</Button>
+		<Button Grid.Row="2" Style="{StaticResource MetroFadingButton}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Click="Button_Click_2" Padding="0">
+			<Image VerticalAlignment="Center" Source="/Resources/MetroIcon Arrow.png" 
+				RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="17" Height="17">
+				<Image.RenderTransform>
+					<CompositeTransform Rotation="90"/>
+				</Image.RenderTransform>
+			</Image>
+		</Button>
 
 	</Grid>
 </UserControl>
