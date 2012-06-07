@@ -1,5 +1,6 @@
 ﻿<Application xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:classes="clr-namespace:MetroAlarm.Classes"
              x:Class="MetroAlarm.App"
              >
     <Application.Resources>
@@ -14,13 +15,15 @@
             </ResourceDictionary.MergedDictionaries>
             <Color x:Key="WindowBackground">White</Color>
             <SolidColorBrush x:Key="SolidWindowBg" Color="{StaticResource WindowBackground}"/>
-            <Color x:Key="Hinting">#FF00AEFF</Color>
-            <SolidColorBrush x:Key="SolidHint" Color="{StaticResource Hinting}"/>
+            <!--<Color x:Key="Hinting">#FF00AEFF</Color>-->
+			<classes:ColorResourceWrapper x:Key="Hinting"/>
+            <SolidColorBrush x:Key="SolidHint" Color="{Binding Color, Source={StaticResource Hinting}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <FontFamily x:Key="ThinFont">Segoe UI Light, Tahoma</FontFamily>
             <FontFamily x:Key="RegFont">Segoe UI, Tahoma</FontFamily>
             <DropShadowEffect x:Key="DropShadow" ShadowDepth="0" Opacity="0.4"/>
 
+            <BlurEffect x:Key="BlurEffect" Radius="0" />  
         </ResourceDictionary>
 
     </Application.Resources>

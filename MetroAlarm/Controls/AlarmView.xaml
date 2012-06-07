@@ -10,13 +10,6 @@
     d:DesignHeight="142" d:DesignWidth="493">
 
     <UserControl.Resources>
-        <Storyboard x:Name="DeleteFadeIn" Storyboard.TargetName="DeleteBtn" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.3" From=".5" To="1"/>
-        </Storyboard>
-        <Storyboard x:Name="DeleteFadeOut" Storyboard.TargetName="DeleteBtn" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.3" From="1" To=".5"/>
-        </Storyboard>
-
         <Storyboard x:Name="FadeOut" Completed="FadeOut_Completed_1">
             <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" Duration="00:00:0.6" From="1" To="0"/>
             <DoubleAnimation Storyboard.TargetName="XMov" Storyboard.TargetProperty="TranslateX" Duration="00:00:0.6" From="0" To="200">
@@ -30,7 +23,6 @@
 				</DoubleAnimation.EasingFunction>         
 			</DoubleAnimation>
         </Storyboard>
-        
         <Storyboard x:Name="FadeIn">
             <DoubleAnimation Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Opacity" Duration="00:00:0.6" From="0" To="1"/>
             <DoubleAnimation Storyboard.TargetName="XMov" Storyboard.TargetProperty="TranslateY" Duration="00:00:0.6" From="100" To="0">
@@ -40,6 +32,13 @@
             </DoubleAnimation>
         </Storyboard>
 
+        <Storyboard x:Name="FadeInBlur" Storyboard.TargetProperty="Radius" Storyboard.TargetName="{Binding BlurEffect}">
+            <DoubleAnimation x:Name="BlurAnimIn"  Duration="0:0:0.5" From="0" To="10"/>
+        </Storyboard>
+        
+        <Storyboard x:Name="FadeOutBlur" Storyboard.TargetProperty="Radius" Storyboard.TargetName="{Binding BlurEffect}">
+            <DoubleAnimation x:Name="BlurAnimOut"  Duration="0:0:0.5" From="10" To="0"/>
+        </Storyboard>
     </UserControl.Resources>
     
     <Border x:Name="LayoutRoot" BorderThickness="1" CornerRadius="2" Margin="0,0,0,5" Padding="5" Background="{StaticResource SolidWindowBg}" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top">
@@ -68,7 +67,7 @@
 
             <TextBox Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Desc, FallbackValue=&lt;Error&gt;, Mode=TwoWay, TargetNullValue=&lt;Error&gt;, UpdateSourceTrigger=PropertyChanged}" Foreground="#FF575757" TextWrapping="Wrap" FontFamily="{StaticResource RegFont}" FontSize="14" ToolTipService.ToolTip="Alarm Notes" AcceptsReturn="True" Cursor="IBeam" VerticalScrollBarVisibility="Auto" BorderBrush="{x:Null}" SelectionBackground="{StaticResource SolidHint}" SelectionForeground="{StaticResource SolidWindowBg}" Style="{StaticResource BorderlessTextBox}" Padding="0" BorderThickness="0"/>
 
-            <TextBlock x:Name="AlarmTime" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Left" Text="{Binding alarmTime, Mode=OneWay, Converter={StaticResource FormatConverter}, ConverterParameter=\{0:t\}}" FontFamily="{StaticResource ThinFont}" FontSize="32" TextTrimming="WordEllipsis" ToolTipService.ToolTip="Alarm Time" Cursor="Hand"/>
+            <TextBlock x:Name="AlarmTime" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Left" Text="{Binding alarmTime, Mode=OneWay, Converter={StaticResource FormatConverter}, ConverterParameter=\{0:t\}}" FontFamily="{StaticResource ThinFont}" FontSize="32" TextTrimming="WordEllipsis" ToolTipService.ToolTip="Alarm Time" Cursor="Hand" MouseLeftButtonUp="AlarmTime_MouseLeftButtonUp"/>
 
             <TS:HorizontalToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding Enabled}" ThumbBrush="{StaticResource SolidWindowBg}" BorderBrush="#FFA8A8A8" FontFamily="{StaticResource ThinFont}" UncheckedBackground="#FF890000" CheckedBackground="#FF006300" ToolTipService.ToolTip="Enable/Disable Alarm" CheckedForeground="{StaticResource SolidWindowBg}" UncheckedForeground="{StaticResource SolidWindowBg}" Style="{StaticResource MetroToggleSwitch}"/>
             <Rectangle Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="3" Height="35" Margin="0,-6,-6,0">
@@ -90,7 +89,9 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Image x:Name="DeleteBtn" Grid.Column="1" HorizontalAlignment="Right" Margin="0,-10,-10,0" VerticalAlignment="Top" Source="/Resources/MetroIcon Trash.png" Stretch="None" Opacity="0.5" Cursor="Hand" MouseEnter="DeleteBtn_MouseEnter" MouseLeave="DeleteBtn_MouseLeave" MouseLeftButtonUp="DeleteBtn_MouseLeftButtonUp" Effect="{StaticResource DropShadow}" ToolTipService.ToolTip="Delete Alarm"/>
+            <Button Grid.Column="1" HorizontalAlignment="Right" Margin="0,-10,-10,0" VerticalAlignment="Top" Cursor="Hand" ToolTipService.ToolTip="Delete Alarm" BorderBrush="{x:Null}" Style="{StaticResource MetroFadingButton}" BorderThickness="0" Padding="0" Click="DeleteBtn_Click">
+                <Image  Source="/Resources/MetroIcon Trash.png" Stretch="None" Effect="{StaticResource DropShadow}"/>
+            </Button>
         </Grid>
     </Border>
 </UserControl>

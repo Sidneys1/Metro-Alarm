@@ -97,9 +97,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Alarm.cs" />
+    <Compile Include="Classes\ColorResourceWrapper.cs" />
     <Compile Include="Classes\Time.cs" />
     <Compile Include="Controls\AlarmView.xaml.cs">
       <DependentUpon>AlarmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CheckLabel.xaml.cs">
+      <DependentUpon>CheckLabel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ConfirmationDialog.xaml.cs">
       <DependentUpon>ConfirmationDialog.xaml</DependentUpon>
@@ -131,6 +135,10 @@
     <Page Include="Controls\AlarmView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CheckLabel.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ConfirmationDialog.xaml">
       <SubType>Designer</SubType>

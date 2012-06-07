@@ -13,59 +13,21 @@
     d:DesignHeight="600" d:DesignWidth="800" Width="Auto" Height="Auto">
 
     <UserControl.Resources>
-        <Storyboard x:Name="CloseFadeIn" Storyboard.TargetName="closeImage" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="0:0:0.3" From="0.5" To="1.0"/>
-        </Storyboard>
-        <Storyboard x:Name="CloseFadeOut" Storyboard.TargetName="closeImage" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.3" From="1" To=".5"/>
-        </Storyboard>
-        
-        <Storyboard x:Name="MinimizeFadeIn" Storyboard.TargetName="minimizeImage" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.3" From=".5" To="1"/>
-        </Storyboard>
-        <Storyboard x:Name="MinimizeFadeOut" Storyboard.TargetName="minimizeImage" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.3" From="1" To=".5"/>
-        </Storyboard>
-
-        <Storyboard x:Name="AlarmButtonFadeIn" Storyboard.TargetName="AlarmsButton" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.1" From=".25" To="1"/>
-        </Storyboard>
-        <Storyboard x:Name="AlarmButtonFadeOut" Storyboard.TargetName="AlarmsButton" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.1" From="1" To=".25"/>
-        </Storyboard>
-
-        <Storyboard x:Name="SettingsButtonFadeIn" Storyboard.TargetName="SettingsButton" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.1" From=".25" To="1"/>
-        </Storyboard>
-        <Storyboard x:Name="SettingsButtonFadeOut" Storyboard.TargetName="SettingsButton" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.1" From="1" To=".25"/>
-        </Storyboard>
-
         <Storyboard x:Name="AlarmFadeIn" Storyboard.TargetName="AlarmFrame" Storyboard.TargetProperty="Opacity">
             <DoubleAnimation Duration="00:00:0.1" From="0" To="1"/>
         </Storyboard>
-        <Storyboard x:Name="AlarmFadeOut" Storyboard.TargetName="AlarmFrame" Storyboard.TargetProperty="Opacity" Completed="AlarmFadeOut_Completed">
+		<Storyboard x:Name="AlarmFadeOut" Storyboard.TargetName="AlarmFrame" Storyboard.TargetProperty="Opacity"
+					Completed="AlarmFadeOut_Completed">
             <DoubleAnimation Duration="00:00:0.1" From="1" To="0"/>
         </Storyboard>
 
         <Storyboard x:Name="SettingsFadeIn" Storyboard.TargetName="SettingsFrame" Storyboard.TargetProperty="Opacity">
             <DoubleAnimation Duration="00:00:0.1" From="0" To="1"/>
         </Storyboard>
-        <Storyboard x:Name="SettingsFadeOut" Storyboard.TargetName="SettingsFrame" Storyboard.TargetProperty="Opacity" Completed="SettingsFadeOut_Completed">
+        <Storyboard x:Name="SettingsFadeOut" Storyboard.TargetName="SettingsFrame" Storyboard.TargetProperty="Opacity"
+					Completed="SettingsFadeOut_Completed">
             <DoubleAnimation Duration="00:00:0.1" From="1" To="0"/>
-        </Storyboard>
-
-        <Storyboard x:Name="AddFadeIn" Storyboard.TargetName="AddBtn" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.3" From=".5" To="1"/>
-        </Storyboard>
-        <Storyboard x:Name="AddFadeOut" Storyboard.TargetName="AddBtn" Storyboard.TargetProperty="Opacity">
-            <DoubleAnimation Duration="00:00:0.3" From="1" To=".5"/>
-        </Storyboard>
-		
-		<Storyboard x:Name="SmoothScroll" Storyboard.TargetName="ScrollMediator" Storyboard.TargetProperty="ScrollableHeightMultiplier">
-			<DoubleAnimation x:Name="ScrollAmount" Duration="0:0:0.3" From="0" To="0.1"/>
-		</Storyboard>
-
+        </Storyboard>	
     </UserControl.Resources>
     
     <Grid x:Name="LayoutRoot" Background="White" Margin="0">
@@ -80,46 +42,18 @@
             <ColumnDefinition Width="6"/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="Black" BorderThickness="1" Margin="0" Grid.RowSpan="3" Grid.ColumnSpan="3" d:IsLocked="True"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
 
         <!-- #region Borders -->
         
-        <Border x:Name="ResizeTop" BorderThickness="0" Margin="0" Cursor="SizeNS" Grid.Column="1" MouseLeftButtonDown="ResizeTop_MouseLeftButtonDown" d:IsLocked="True">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource Hinting}"/>
-            </Border.Background>
-        </Border>
-        <Border x:Name="ResizeBottom" BorderThickness="0" Margin="0,0,0,1" Grid.Row="2" Cursor="SizeNS" d:LayoutOverrides="GridBox" Grid.Column="1" MouseLeftButtonDown="ResizeBottom_MouseLeftButtonDown" d:IsLocked="True">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource WindowBackground}"/>
-            </Border.Background>
-        </Border>
-        <Border x:Name="ResizeRight" BorderThickness="0" Margin="0,0,1,0" Cursor="SizeWE" Grid.Column="2" Grid.Row="1" MouseLeftButtonDown="ResizeRight_MouseLeftButtonDown" d:IsLocked="True">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource WindowBackground}"/>
-            </Border.Background>
-        </Border>
-        <Border x:Name="ResizeLeft" BorderThickness="0" Margin="1,0,0,0" Cursor="SizeWE" Grid.Row="1" MouseLeftButtonDown="ResizeLeft_MouseLeftButtonDown" d:IsLocked="True">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource WindowBackground}"/>
-            </Border.Background>
-        </Border>
-        <Border x:Name="ResizeTopLeft" BorderThickness="0" Margin="0" Cursor="SizeNWSE" MouseLeftButtonDown="ResizeTopLeft_MouseLeftButtonDown" d:IsLocked="True">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource Hinting}"/>
-            </Border.Background>
-        </Border>
-        <Border x:Name="ResizeTopRight" BorderThickness="0" Margin="0" Cursor="SizeNESW" Grid.Column="2" MouseLeftButtonDown="ResizeTopRight_MouseLeftButtonDown" d:IsLocked="True">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource Hinting}"/>
-            </Border.Background>
-        </Border>
-        <Border x:Name="ResizeBottomLeft" BorderThickness="0" Margin="1,0,0,1" Grid.Row="2" Cursor="SizeNESW" d:LayoutOverrides="GridBox" MouseLeftButtonDown="ResizeBottomLeft_MouseLeftButtonDown" d:IsLocked="True">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource WindowBackground}"/>
-            </Border.Background>
-        </Border>
-        <Image x:Name="ResizeBottomRight" Margin="-7,-7,1,1" Grid.Row="2" Cursor="SizeNWSE" Grid.Column="2" d:LayoutOverrides="GridBox" Source="/Resources/grippy.png" Stretch="None" MouseLeftButtonDown="ResizeBottomRight_MouseLeftButtonDown" d:IsLocked="True"/>
+        <Border x:Name="ResizeTop" BorderThickness="0" Margin="0" Cursor="SizeNS" Grid.Column="1" MouseLeftButtonDown="ResizeTop_MouseLeftButtonDown" Background="{StaticResource SolidHint}"/>
+        <Border x:Name="ResizeBottom" BorderThickness="0" Margin="0,0,0,1" Grid.Row="2" Cursor="SizeNS" d:LayoutOverrides="GridBox" Grid.Column="1" MouseLeftButtonDown="ResizeBottom_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
+		<Border x:Name="ResizeRight" BorderThickness="0" Margin="0,0,1,0" Cursor="SizeWE" Grid.Column="2" Grid.Row="1" MouseLeftButtonDown="ResizeRight_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
+		<Border x:Name="ResizeLeft" BorderThickness="0" Margin="1,0,0,0" Cursor="SizeWE" Grid.Row="1" MouseLeftButtonDown="ResizeLeft_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
+		<Border x:Name="ResizeTopLeft" BorderThickness="0" Margin="0" Cursor="SizeNWSE" MouseLeftButtonDown="ResizeTopLeft_MouseLeftButtonDown" Background="{StaticResource SolidHint}"/>
+		<Border x:Name="ResizeTopRight" BorderThickness="0" Margin="0" Cursor="SizeNESW" Grid.Column="2" MouseLeftButtonDown="ResizeTopRight_MouseLeftButtonDown" Background="{StaticResource SolidHint}"/>
+		<Border x:Name="ResizeBottomLeft" BorderThickness="0" Margin="1,0,0,1" Grid.Row="2" Cursor="SizeNESW" d:LayoutOverrides="GridBox" MouseLeftButtonDown="ResizeBottomLeft_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
+		<Image x:Name="ResizeBottomRight" Margin="-7,-7,1,1" Grid.Row="2" Cursor="SizeNWSE" Grid.Column="2" d:LayoutOverrides="GridBox" Source="/Resources/grippy.png" Stretch="None" MouseLeftButtonDown="ResizeBottomRight_MouseLeftButtonDown"/>
         
         <!-- #endregion -->
 
@@ -132,7 +66,7 @@
             
             <!-- #region Titlebar -->
             
-            <Grid x:Name="Titlebar" d:LayoutOverrides="Width" d:IsLocked="True">
+            <Grid x:Name="Titlebar" d:LayoutOverrides="Width">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -140,13 +74,13 @@
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
                 <sdk:Label x:Name="Branding" HorizontalAlignment="Left" FontFamily="{StaticResource RegFont}" FontWeight="ExtraBold" Padding="0" Content="METRO ALARM" BorderThickness="0" HorizontalContentAlignment="Left" Margin="0,0,0,5" Height="20"/>
-                <Border BorderThickness="0" Margin="0" MouseLeftButtonDown="Dragger_MouseLeftButtonDown" Grid.Column="1">
-                    <Border.Background>
-                        <SolidColorBrush Color="{StaticResource WindowBackground}"/>
-                    </Border.Background>
-                </Border>
-                <Image x:Name="closeImage" Stretch="None" Opacity="0.5" Cursor="Hand" Margin="0" Grid.Column="3" Source="/Resources/X.png" MouseEnter="closeImage_MouseEnter" MouseLeave="closeImage_MouseLeave" Width="20" Height="20" MouseLeftButtonUp="closeImage_MouseLeftButtonUp" Effect="{StaticResource DropShadow}"/>
-                <Image x:Name="minimizeImage" Source="/Resources/_.png" Stretch="None" Opacity="0.5" Margin="0" Grid.Column="2" Width="20" Height="20" MouseEnter="minimizeImage_MouseEnter" MouseLeave="minimizeImage_MouseLeave" MouseLeftButtonUp="minimizeImage_MouseLeftButtonUp" Cursor="Hand" Effect="{StaticResource DropShadow}"/>
+                <Border BorderThickness="0" Margin="0" MouseLeftButtonDown="Dragger_MouseLeftButtonDown" Grid.Column="1" Background="{StaticResource SolidWindowBg}"/>
+				<Button x:Name="minimizeImage" Cursor="Hand" Margin="0" Grid.Column="3" Style="{StaticResource MetroFadingButton}" BorderBrush="{x:Null}" BorderThickness="0" Padding="0" Background="{StaticResource SolidWindowBg}" Click="closeImage_Click">
+                    <Image Stretch="None" Source="/Resources/X.png" Effect="{StaticResource DropShadow}"/>
+                </Button>
+                <Button x:Name="closeImage" Margin="0" Grid.Column="2" Cursor="Hand" Style="{StaticResource MetroFadingButton}" BorderThickness="0" BorderBrush="{x:Null}" Background="{StaticResource SolidWindowBg}" Click="minimizeImage_Click">
+                    <Image Stretch="None" Source="/Resources/_.png" Effect="{StaticResource DropShadow}"/>
+                </Button>
             </Grid>
             
             <!-- #endregion -->
@@ -162,30 +96,18 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 
-                <sdk:Label x:Name="AlarmsButton" HorizontalAlignment="Left" Margin="0" Content="alarms" FontFamily="{StaticResource ThinFont}" FontSize="22" Padding="0,0,10,0" Cursor="Hand" MouseLeftButtonUp="AlarmsButton_MouseLeftButtonUp" Effect="{StaticResource DropShadow}"/>
-                <sdk:Label x:Name="SettingsButton" HorizontalAlignment="Left" Margin="0,0,10,0" Content="settings" FontFamily="{StaticResource ThinFont}" FontSize="22" Grid.Column="1" Cursor="Hand" Opacity="0.25" MouseLeftButtonUp="AlarmsButton_MouseLeftButtonUp" Effect="{StaticResource DropShadow}"/>
-                <Border BorderThickness="0" Margin="0" Grid.Column="2" Grid.ColumnSpan="1" MouseLeftButtonDown="Dragger_MouseLeftButtonDown">
-                    <Border.Background>
-                        <SolidColorBrush Color="{StaticResource WindowBackground}"/>
-                    </Border.Background>
-                </Border>
-                <Image x:Name="AddBtn" Grid.Column="3" Stretch="None" Source="Resources/MetroIcon Add.png" Effect="{StaticResource DropShadow}" Opacity="0.5" Cursor="Hand" ToolTipService.ToolTip="Add a new Alarm" MouseLeftButtonDown="Image_MouseLeftButtonDown_1" HorizontalAlignment="Right" VerticalAlignment="Center" MouseEnter="AddBtn_MouseEnter" MouseLeave="AddBtn_MouseLeave"/>
-                <sdk:Label x:Name="InstallBtn" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Content="INSTALL" Cursor="Hand" ToolTipService.ToolTip="Install to your Computer to use Metro Alarm offline!" FontFamily="{StaticResource RegFont}" FontWeight="Bold" FontSize="12" BorderThickness="2" Padding="2,0" MouseLeftButtonUp="InstallBtn_MouseLeftButtonUp">
-                    <sdk:Label.BorderBrush>
-                        <SolidColorBrush Color="{StaticResource Hinting}"/>
-                    </sdk:Label.BorderBrush>
-                    <sdk:Label.Background>
-                        <SolidColorBrush Color="{StaticResource Hinting}"/>
-                    </sdk:Label.Background>
-                    <sdk:Label.Foreground>
-                        <SolidColorBrush Color="{StaticResource WindowBackground}"/>
-                    </sdk:Label.Foreground>
-                </sdk:Label>
-            </Grid>
+                <local:CheckLabel x:Name="AlarmsButton" Margin="0,0,10,0" Text="alarms" HorizontalAlignment="Left" FontFamily="{StaticResource ThinFont}" FontSize="22" isChecked="True" CheckChanged="SettingsButton_CheckChanged"/>               
+                <local:CheckLabel x:Name="SettingsButton" Grid.Column="1" Text="settings" HorizontalAlignment="Left" FontFamily="{StaticResource ThinFont}" FontSize="22" CheckChanged="SettingsButton_CheckChanged"/>
+
+                <Border BorderThickness="0" Margin="0" Grid.Column="2" Grid.ColumnSpan="1" MouseLeftButtonDown="Dragger_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
+				<Button Grid.Column="3" Cursor="Hand" ToolTipService.ToolTip="Add a new Alarm" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MetroFadingButton}" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" Click="AddBtn_Click">
+                    <Image Stretch="None" Source="Resources/MetroIcon Add.png" Effect="{StaticResource DropShadow}"/>
+                </Button>
+                <sdk:Label x:Name="InstallBtn" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Content="INSTALL" Cursor="Hand" ToolTipService.ToolTip="Install to your Computer to use Metro Alarm offline!" FontFamily="{StaticResource RegFont}" FontWeight="Bold" FontSize="12" BorderThickness="2" Padding="2,0" MouseLeftButtonUp="InstallBtn_MouseLeftButtonUp" BorderBrush="{StaticResource SolidHint}" Foreground="{StaticResource SolidWindowBg}" Background="{StaticResource SolidHint}"/>
+			</Grid>
             
             <!-- #endregion -->
-
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Padding="0" BorderBrush="{x:Null}" Margin="0">
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Padding="0" BorderBrush="{x:Null}" Margin="0" d:IsHidden="True">
                 <classes:ItemsControlWrapper x:Name="AlarmFrame" Margin="0,20,5,0" RemoveAlarm="AlarmFrame_RemoveAlarm" ItemsSource="{Binding}">
                     <classes:ItemsControlWrapper.ItemTemplate>
                         <DataTemplate>
@@ -212,8 +134,14 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Grid x:Name="SettingsFrame" Grid.Row="2" d:IsHidden="True">
-                <sdk:Label Margin="0" Content="Settings" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontFamily="{StaticResource ThinFont}"/>
+            <Grid x:Name="SettingsFrame" Grid.Row="2" Margin="0,15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="332,61,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+
             </Grid>
         </Grid>
     </Grid>

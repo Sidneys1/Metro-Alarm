@@ -10,7 +10,7 @@ namespace MetroAlarm.Controls
 	public partial class AlarmView : UserControl
 	{
 		public event EventHandler<Classes.AlarmArgs> RemoveAlarm;
-
+        BlurEffect blur = (BlurEffect)Application.Current.Resources["BlurEffect"];
 		public AlarmView()
 		{
 			InitializeComponent();
@@ -18,42 +18,43 @@ namespace MetroAlarm.Controls
 			FadeIn.Begin();
 		}
 
-		#region Edit Name
-
-		private void TextBlock_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
+		private void FadeOut_Completed_1(object sender, EventArgs e)
 		{
-			NameEditBox.Visibility = System.Windows.Visibility.Visible;
-			NameEditBox.Focus();
+			if (RemoveAlarm != null)
+				RemoveAlarm(this, new Classes.AlarmArgs(this.DataContext as Classes.Alarm));
 		}
 
-		#endregion
+        private void AlarmTime_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            TimeEditor editor = new TimeEditor();
 
-		#region Delete Button
+            FadeOutBlur.Stop();
+            FadeInBlur.Stop();
 
-		private void DeleteBtn_MouseEnter(object sender, MouseEventArgs e)
-		{
-			DeleteFadeIn.Begin();
-		}
+            editor.Closed += (send, args) =>
+                {
+                    FadeOutBlur.Begin();
+                    if (editor.DialogResult == true)
+                    { 
+                        //Do something...
+                    }
+                };
+            FadeInBlur.Begin();
+            editor.Show();
+        }
 
-		private void DeleteBtn_MouseLeave(object sender, MouseEventArgs e)
-		{
-			DeleteFadeOut.Begin();
-		}
-
-		#endregion
-
-		private void DeleteBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-		{
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
 			ConfirmationDialog d = new ConfirmationDialog();
 
-            BlurEffect blur = new BlurEffect();
-            blur.Radius = 10;
+            blur.Radius = 0;
 
-            Application.Current.RootVisual.Effect = blur;
+            FadeOutBlur.Stop();
+            FadeInBlur.Stop();
 
             d.Closed += (send, args) =>
-				{                
-                    Application.Current.RootVisual.Effect = null;
+				{
+                    FadeOutBlur.Begin();
 
                     if (d.DialogResult == true)
                     {       
@@ -61,14 +62,8 @@ namespace MetroAlarm.Controls
                     }
 				};
 
+            FadeInBlur.Begin();
 			d.Show();
-		}
-
-		private void FadeOut_Completed_1(object sender, EventArgs e)
-		{
-			if (RemoveAlarm != null)
-				RemoveAlarm(this, new Classes.AlarmArgs(this.DataContext as Classes.Alarm));
-
-		}
+        }
 	}
 }

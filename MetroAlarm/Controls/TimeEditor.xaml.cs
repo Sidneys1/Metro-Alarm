@@ -28,6 +28,14 @@ namespace MetroAlarm.Controls
 		{
 			this.DialogResult = false;
 		}
+
+        private void CheckLabel_CheckChanged_1(object sender, EventArgs e)
+        {
+            if (sender == AM)
+                PM.SilentCheckState(false);
+            else if (sender == PM)
+                AM.SilentCheckState(false);
+        }
 	}
 }
 

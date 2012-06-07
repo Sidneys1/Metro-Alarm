@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Linq;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 // For Changing the hinting color:
 //		http://forums.silverlight.net/p/229874/560110.aspx/1?Re+Change+Color+staticresource+at+runtime+
@@ -39,20 +42,20 @@ namespace MetroAlarm
 
 		#region Titlebar
 
-		private void minimizeImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-		{
-			Application.Current.MainWindow.WindowState = WindowState.Minimized;
-		}
-
-		private void closeImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-		{
-			Application.Current.MainWindow.Close();
-		}
-
 		private void Dragger_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			Application.Current.MainWindow.DragMove();
 		}
+
+        private void closeImage_Click(object sender, RoutedEventArgs e)
+        {
+			Application.Current.MainWindow.Close();
+        }
+
+        private void minimizeImage_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
 
 		#endregion
 
@@ -102,23 +105,21 @@ namespace MetroAlarm
 
 		#region Page Switching
 
-		private void AlarmsButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-		{
-			if (page == 1 && sender == AlarmsButton)
+        private void SettingsButton_CheckChanged(object sender, EventArgs e)
+        {
+            if (page == 1 && sender == AlarmsButton)
 			{
-				AlarmButtonFadeIn.Begin();
-				SettingsButtonFadeOut.Begin();
 				SettingsFadeOut.Begin();
+				SettingsButton.SilentCheckState(false);
 				page = 0;
 			}
 			else if (page == 0 && sender == SettingsButton)
 			{
-				AlarmButtonFadeOut.Begin();
-				SettingsButtonFadeIn.Begin();
 				AlarmFadeOut.Begin();
+				AlarmsButton.SilentCheckState(false);
 				page = 1;
 			}
-		}
+        }
 
 		#endregion
 
@@ -153,55 +154,35 @@ namespace MetroAlarm
 			Alarms.Remove(e.Alarm);
 		}
 
-		private void Image_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
-		{
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
 			Alarms.Add(new Classes.Alarm("New Alarm"));
-		}
+        }
 
 		#endregion
 
 		#region Fades
 
-		private void AddBtn_MouseEnter(object sender, MouseEventArgs e)
-		{
-			AddFadeIn.Begin();
-		}
-
-		private void AddBtn_MouseLeave(object sender, MouseEventArgs e)
-		{
-			AddFadeOut.Begin();
-		}
-
 		private void AlarmFadeOut_Completed(object sender, EventArgs e)
 		{
+            AlarmFrame.Visibility = System.Windows.Visibility.Collapsed;
+            SettingsFrame.Visibility = System.Windows.Visibility.Visible;
 			SettingsFadeIn.Begin();
 		}
 
 		private void SettingsFadeOut_Completed(object sender, EventArgs e)
 		{
+            AlarmFrame.Visibility = System.Windows.Visibility.Visible;
+            SettingsFrame.Visibility = System.Windows.Visibility.Collapsed;
 			AlarmFadeIn.Begin();
 		}
 
-		private void closeImage_MouseEnter(object sender, MouseEventArgs e)
-		{
-			CloseFadeIn.Begin();
-		}
-
-		private void closeImage_MouseLeave(object sender, MouseEventArgs e)
-		{
-			CloseFadeOut.Begin();
-		}
-
-		private void minimizeImage_MouseEnter(object sender, MouseEventArgs e)
-		{
-			MinimizeFadeIn.Begin();
-		}
-
-		private void minimizeImage_MouseLeave(object sender, MouseEventArgs e)
-		{
-			MinimizeFadeOut.Begin();
-		}
-
 		#endregion
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ((Classes.ColorResourceWrapper)Application.Current.Resources["Hinting"]).Color = Colors.Gray;
+            //ChangeColorStoryboard.Begin();
+        }
 	}
 }
