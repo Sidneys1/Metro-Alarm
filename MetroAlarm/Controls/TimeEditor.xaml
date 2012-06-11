@@ -19,10 +19,10 @@
         </Grid.RowDefinitions>
 
         <Button x:Name="CancelButton" Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,6,0,0" Grid.Row="1" Background="{StaticResource SolidWindowBg}" BorderBrush="{x:Null}" Foreground="Black" Style="{StaticResource MetroFadingButton}" ToolTipService.ToolTip="Cancel" Cursor="Hand">
-        	<Image Source="/Resources/MetroIcon X.png" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource DropShadow}" />
+        	<Image Source="/Resources/Images/MetroIcon X.png" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource DropShadow}" />
 		</Button>
         <Button x:Name="OKButton" Click="OKButton_Click" HorizontalAlignment="Right" Margin="0,6,40,0" Grid.Row="1" Background="{StaticResource SolidWindowBg}" BorderBrush="{x:Null}" Foreground="{x:Null}" Style="{StaticResource MetroFadingButton}" ToolTipService.ToolTip="Accept" Cursor="Hand" >
-        	<Image Source="/Resources/MetroIcon Check.png" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource DropShadow}"/>
+        	<Image Source="/Resources/Images/MetroIcon Check.png" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Effect="{StaticResource DropShadow}"/>
       
 		</Button>
         <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">

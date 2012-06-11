@@ -61,7 +61,7 @@
 			<Grid d:LayoutOverrides="Width, Height">
 				<ToggleSwitch_Borders:ClippingBorder x:Name="Background" BorderThickness="{TemplateBinding BorderThickness}" Background="White" IsTabStop="False">
 					<Border BorderBrush="#FFEBEBEB" BorderThickness="1" Background="{TemplateBinding Background}">
-						<Image x:Name="image" Margin="3" Source="/Resources/MetroIcon Arrow.png" RenderTransformOrigin="0.5,0.5" Effect="{StaticResource DropShadow}" Opacity="0.5">
+						<Image x:Name="image" Margin="3" Source="/Resources/Images/MetroIcon Arrow.png" RenderTransformOrigin="0.5,0.5" Effect="{StaticResource DropShadow}" Opacity="0.5">
 							<Image.RenderTransform>
 								<CompositeTransform/>
 							</Image.RenderTransform>

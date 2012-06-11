@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
 
 namespace MetroAlarm.Controls
 {
@@ -64,6 +67,16 @@ namespace MetroAlarm.Controls
             };
             FadeInBlur.Begin();
             editor.Show();
+        }
+
+        private void PopupMenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            foreach (SL4PopupMenu.PopupMenuItem item in AlarmsList.Items)
+            {
+				item.ImageSource = null;
+            }
+
+            (sender as SL4PopupMenu.PopupMenuItem).ImageSource = new BitmapImage(new Uri("/Resources/Images/MetroIcon Check.png", UriKind.Relative));
         }
 	}
 }

@@ -32,7 +32,36 @@ namespace MetroAlarm.Classes
                     PropertyChanged(this, new PropertyChangedEventArgs("Desc"));
             }
         }
-		public bool Enabled { get; set; }
+
+        bool _enabled = false;
+        public bool Enabled
+        {
+            get { return _enabled; }
+            set
+            {
+                if (value != _enabled)
+                {
+                    _enabled = value;
+                    if (PropertyChanged != null)
+                        PropertyChanged(this, new PropertyChangedEventArgs("Enabled"));
+                }
+            }
+        }
+
+        AudioTrack _alarmTrack = AudioTrack.Beeper;
+        public AudioTrack AlarmTrack
+        {
+            get { return _alarmTrack; }
+            set
+            {
+                if (value != _alarmTrack)
+                {
+                    _alarmTrack = value;
+                    if (PropertyChanged != null)
+                        PropertyChanged(this, new PropertyChangedEventArgs("AlarmTrack"));
+                }
+            }
+        }
 
 		public Alarm(string n) 
 		{ 

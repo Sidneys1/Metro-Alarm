@@ -16,7 +16,9 @@
             <Color x:Key="WindowBackground">White</Color>
             <SolidColorBrush x:Key="SolidWindowBg" Color="{StaticResource WindowBackground}"/>
             <!--<Color x:Key="Hinting">#FF00AEFF</Color>-->
-			<classes:ColorResourceWrapper x:Key="Hinting"/>
+			<classes:ColorResourceWrapper x:Key="Hinting">
+				<classes:ColorResourceWrapper.Color>#FF00AEFF</classes:ColorResourceWrapper.Color>
+			</classes:ColorResourceWrapper>
             <SolidColorBrush x:Key="SolidHint" Color="{Binding Color, Source={StaticResource Hinting}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <FontFamily x:Key="ThinFont">Segoe UI Light, Tahoma</FontFamily>

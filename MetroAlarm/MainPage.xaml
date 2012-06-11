@@ -28,6 +28,10 @@
 					Completed="SettingsFadeOut_Completed">
             <DoubleAnimation Duration="00:00:0.1" From="1" To="0"/>
         </Storyboard>	
+		
+		<Storyboard x:Name="ColorFade" Storyboard.TargetProperty="Color">
+			<ColorAnimation x:Name="ColorAnim" To="Red" Duration="0:0:0.6" />
+		</Storyboard>
     </UserControl.Resources>
     
     <Grid x:Name="LayoutRoot" Background="White" Margin="0">
@@ -42,10 +46,10 @@
             <ColumnDefinition Width="6"/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="Black" BorderThickness="1" Margin="0" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
-
         <!-- #region Borders -->
         
+		<Border BorderBrush="Black" BorderThickness="1" Margin="0" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+
         <Border x:Name="ResizeTop" BorderThickness="0" Margin="0" Cursor="SizeNS" Grid.Column="1" MouseLeftButtonDown="ResizeTop_MouseLeftButtonDown" Background="{StaticResource SolidHint}"/>
         <Border x:Name="ResizeBottom" BorderThickness="0" Margin="0,0,0,1" Grid.Row="2" Cursor="SizeNS" d:LayoutOverrides="GridBox" Grid.Column="1" MouseLeftButtonDown="ResizeBottom_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
 		<Border x:Name="ResizeRight" BorderThickness="0" Margin="0,0,1,0" Cursor="SizeWE" Grid.Column="2" Grid.Row="1" MouseLeftButtonDown="ResizeRight_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
@@ -53,7 +57,7 @@
 		<Border x:Name="ResizeTopLeft" BorderThickness="0" Margin="0" Cursor="SizeNWSE" MouseLeftButtonDown="ResizeTopLeft_MouseLeftButtonDown" Background="{StaticResource SolidHint}"/>
 		<Border x:Name="ResizeTopRight" BorderThickness="0" Margin="0" Cursor="SizeNESW" Grid.Column="2" MouseLeftButtonDown="ResizeTopRight_MouseLeftButtonDown" Background="{StaticResource SolidHint}"/>
 		<Border x:Name="ResizeBottomLeft" BorderThickness="0" Margin="1,0,0,1" Grid.Row="2" Cursor="SizeNESW" d:LayoutOverrides="GridBox" MouseLeftButtonDown="ResizeBottomLeft_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
-		<Image x:Name="ResizeBottomRight" Margin="-7,-7,1,1" Grid.Row="2" Cursor="SizeNWSE" Grid.Column="2" d:LayoutOverrides="GridBox" Source="/Resources/grippy.png" Stretch="None" MouseLeftButtonDown="ResizeBottomRight_MouseLeftButtonDown"/>
+		<Image x:Name="ResizeBottomRight" Margin="-7,-7,1,1" Grid.Row="2" Cursor="SizeNWSE" Grid.Column="2" d:LayoutOverrides="GridBox" Source="/Resources/Images/grippy.png" Stretch="None" MouseLeftButtonDown="ResizeBottomRight_MouseLeftButtonDown"/>
         
         <!-- #endregion -->
 
@@ -66,20 +70,23 @@
             
             <!-- #region Titlebar -->
             
-            <Grid x:Name="Titlebar" d:LayoutOverrides="Width">
+            <Grid x:Name="Titlebar" d:LayoutOverrides="Width" d:IsLocked="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
+				
                 <sdk:Label x:Name="Branding" HorizontalAlignment="Left" FontFamily="{StaticResource RegFont}" FontWeight="ExtraBold" Padding="0" Content="METRO ALARM" BorderThickness="0" HorizontalContentAlignment="Left" Margin="0,0,0,5" Height="20"/>
+				
                 <Border BorderThickness="0" Margin="0" MouseLeftButtonDown="Dragger_MouseLeftButtonDown" Grid.Column="1" Background="{StaticResource SolidWindowBg}"/>
+				
 				<Button x:Name="minimizeImage" Cursor="Hand" Margin="0" Grid.Column="3" Style="{StaticResource MetroFadingButton}" BorderBrush="{x:Null}" BorderThickness="0" Padding="0" Background="{StaticResource SolidWindowBg}" Click="closeImage_Click">
-                    <Image Stretch="None" Source="/Resources/X.png" Effect="{StaticResource DropShadow}"/>
+                    <Image Stretch="None" Source="/Resources/Images/X.png" Effect="{StaticResource DropShadow}"/>
                 </Button>
                 <Button x:Name="closeImage" Margin="0" Grid.Column="2" Cursor="Hand" Style="{StaticResource MetroFadingButton}" BorderThickness="0" BorderBrush="{x:Null}" Background="{StaticResource SolidWindowBg}" Click="minimizeImage_Click">
-                    <Image Stretch="None" Source="/Resources/_.png" Effect="{StaticResource DropShadow}"/>
+                    <Image Stretch="None" Source="/Resources/Images/_.png" Effect="{StaticResource DropShadow}"/>
                 </Button>
             </Grid>
             
@@ -87,7 +94,7 @@
             
             <!-- #region Navigation Bar -->
             
-            <Grid x:Name="Navbar" Margin="0" Grid.Row="1">
+            <Grid x:Name="Navbar" Margin="0" Grid.Row="1" d:IsLocked="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -100,14 +107,17 @@
                 <local:CheckLabel x:Name="SettingsButton" Grid.Column="1" Text="settings" HorizontalAlignment="Left" FontFamily="{StaticResource ThinFont}" FontSize="22" CheckChanged="SettingsButton_CheckChanged"/>
 
                 <Border BorderThickness="0" Margin="0" Grid.Column="2" Grid.ColumnSpan="1" MouseLeftButtonDown="Dragger_MouseLeftButtonDown" Background="{StaticResource SolidWindowBg}"/>
+				
 				<Button Grid.Column="3" Cursor="Hand" ToolTipService.ToolTip="Add a new Alarm" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MetroFadingButton}" Padding="0" BorderBrush="{x:Null}" BorderThickness="0" Click="AddBtn_Click" Background="{StaticResource SolidWindowBg}">
-                    <Image Stretch="None" Source="Resources/MetroIcon Add.png" Effect="{StaticResource DropShadow}"/>
+                    <Image Stretch="None" Source="/Resources/Images/MetroIcon Add.png" Effect="{StaticResource DropShadow}"/>
                 </Button>
                 <sdk:Label x:Name="InstallBtn" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Content="INSTALL" Cursor="Hand" ToolTipService.ToolTip="Install to your Computer to use Metro Alarm offline!" FontFamily="{StaticResource RegFont}" FontWeight="Bold" FontSize="12" BorderThickness="2" Padding="2,0" MouseLeftButtonUp="InstallBtn_MouseLeftButtonUp" BorderBrush="{StaticResource SolidHint}" Foreground="{StaticResource SolidWindowBg}" Background="{StaticResource SolidHint}"/>
 			</Grid>
             
             <!-- #endregion -->
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0" Padding="0" BorderBrush="{x:Null}" Margin="0" d:IsHidden="True">
+			
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" BorderThickness="0"
+						  Padding="0" BorderBrush="{x:Null}" Margin="0" d:IsLocked="True">
                 <classes:ItemsControlWrapper x:Name="AlarmFrame" Margin="0,20,5,0" RemoveAlarm="AlarmFrame_RemoveAlarm" ItemsSource="{Binding}">
                     <classes:ItemsControlWrapper.ItemTemplate>
                         <DataTemplate>
@@ -116,33 +126,82 @@
                     </classes:ItemsControlWrapper.ItemTemplate>
                 </classes:ItemsControlWrapper>
             </ScrollViewer>
-			            
-            <Rectangle Grid.Row="2" Height="15" VerticalAlignment="Top" Margin="0,0,17,0">
+			
+            <ScrollViewer x:Name="SettingsFrame" Margin="0" Grid.Row="2" BorderBrush="{x:Null}" BorderThickness="0" Padding="0">
+            	<Grid VerticalAlignment="Top" HorizontalAlignment="Center">
+            		<Grid.RowDefinitions>
+            			<RowDefinition Height="Auto"/>
+            			<RowDefinition Height="50"/>
+            			<RowDefinition Height="*"/>
+            		</Grid.RowDefinitions>
+					
+            		<sdk:Label Content="Accent Color" FontFamily="{StaticResource ThinFont}" FontSize="22" Margin="0,10,0,0" />
+            		<StackPanel x:Name="AccentColorBoxes" Margin="30,0,0,0" Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center">
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF00AEFF" CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color" />
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF0061FF" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF0015FF" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF3700FF" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF8300FF" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFD000FF" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFFF00E1" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFFF0094" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFFF0048" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFFF0400" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFFF5000" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFFF9D00" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFFFE900" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FFB5E800" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF6EDE05" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF25CF00" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF25CD38" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF10EC6B" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF00D89A" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            			<controls:ColorCheckBox Margin="8,0" Background="#FF00D2D6" IsChecked="False"
+            				CheckChanged="ColorCheckBox_CheckChanged" ToolTipService.ToolTip="Change the Accent Color"/>
+            		</StackPanel>
+            	</Grid>
+            </ScrollViewer>
+			
+			<!-- #region Scroll Fades -->
+			
+            <Rectangle Grid.Row="2" Height="15" VerticalAlignment="Top" Margin="0,0,17,0" d:IsLocked="True">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="Transparent" Offset="1"/>
+                    	<GradientStop Color="White" Offset="0"/>
+                    	<GradientStop Color="Transparent" Offset="1"/>
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle Grid.Row="2" Height="15" VerticalAlignment="Bottom" Margin="0,0,17,0">
+			
+            <Rectangle Grid.Row="2" Height="15" VerticalAlignment="Bottom" Margin="0,0,17,0" d:IsLocked="True">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="White" Offset="1"/>
-                        <GradientStop Color="Transparent"/>
+                    	<GradientStop Color="White" Offset="1"/>
+                    	<GradientStop Color="Transparent"/>
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-
-            <Grid x:Name="SettingsFrame" Grid.Row="2" Margin="0,15">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Button Content="Button" HorizontalAlignment="Left" Margin="332,61,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-
-            </Grid>
+			
+			<!-- #endregion -->
+			
         </Grid>
     </Grid>
 </UserControl>

@@ -67,6 +67,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="mscorlib" />
+    <Reference Include="SL4PopupMenu">
+      <HintPath>..\packages\SL4PopupMenu.2.6.4\lib\SL4PopupMenu.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core">
@@ -85,6 +88,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.Windows.Controls.Input.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Controls.Toolkit">
+      <HintPath>..\packages\SilverlightToolkit-Core.4.2010.4\lib\sl4\System.Windows.Controls.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Interactivity" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
@@ -97,13 +103,20 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Alarm.cs" />
+    <Compile Include="Classes\Audio.cs" />
     <Compile Include="Classes\ColorResourceWrapper.cs" />
     <Compile Include="Classes\Time.cs" />
+    <Compile Include="Controls\AlarmSound.xaml.cs">
+      <DependentUpon>AlarmSound.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AlarmView.xaml.cs">
       <DependentUpon>AlarmView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CheckLabel.xaml.cs">
       <DependentUpon>CheckLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ColorCheckBox.xaml.cs">
+      <DependentUpon>ColorCheckBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ConfirmationDialog.xaml.cs">
       <DependentUpon>ConfirmationDialog.xaml</DependentUpon>
@@ -132,6 +145,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\AlarmSound.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AlarmView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +156,10 @@
     <Page Include="Controls\CheckLabel.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ColorCheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ConfirmationDialog.xaml">
       <SubType>Designer</SubType>
@@ -185,21 +206,36 @@
     <None Include="Properties\OutOfBrowserSettings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\X.png">
+    <None Include="Resources\Images\X.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\_.png">
+    <None Include="Resources\Images\_.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\grippy.png">
+    <None Include="Resources\Images\grippy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Images\MetroIcon Audio - Dropdown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\MetroIcon Audio.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Images\MetroIcon Zzz.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Resource Include="Resources\Audio\alarm.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Audio\beeper.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Resources\Icons\ico128.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -212,22 +248,19 @@
     <Content Include="Resources\Icons\ico48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\MetroIcon Audio.png">
+    <None Include="Resources\Images\MetroIcon Pencil.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\MetroIcon Pencil.png">
+    <None Include="Resources\Images\MetroIcon Arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\MetroIcon Arrow.png">
+    <None Include="Resources\Images\MetroIcon Trash.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\MetroIcon Trash.png">
+    <None Include="Resources\Images\MetroIcon Add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\MetroIcon Add.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\MetroIcon X.png">
+    <None Include="Resources\Images\MetroIcon X.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -238,7 +271,7 @@
     <DesignTimeOnly Include="SampleData\SampleAlarms\SampleAlarms.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\MetroIcon Check.png">
+    <None Include="Resources\Images\MetroIcon Check.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

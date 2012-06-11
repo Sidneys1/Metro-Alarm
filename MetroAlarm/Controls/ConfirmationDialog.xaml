@@ -12,14 +12,14 @@
         </Grid.RowDefinitions>
 
         <Button x:Name="CancelButton" Click="CancelButton_Click" HorizontalAlignment="Right" Margin="0,6,0,0" Grid.Row="1" BorderBrush="{x:Null}" Background="{StaticResource SolidWindowBg}" Padding="3" ToolTipService.ToolTip="Cancel" Cursor="Hand" BorderThickness="0" Style="{StaticResource MetroFadingButton}" >
-        	<Image Source="/Resources/MetroIcon X.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Effect="{StaticResource DropShadow}">
+        	<Image Source="/Resources/Images/MetroIcon X.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Effect="{StaticResource DropShadow}">
         		<Image.RenderTransform>
         			<CompositeTransform/>
         		</Image.RenderTransform>
         	</Image>      
 		</Button>
         <Button x:Name="OKButton" Click="OKButton_Click" HorizontalAlignment="Right" Margin="0,6,50,0" Grid.Row="1" FontFamily="{StaticResource RegFont}" FontWeight="Bold" BorderBrush="{x:Null}" Background="{StaticResource SolidWindowBg}" Padding="3" ToolTipService.ToolTip="Delete" Cursor="Hand" BorderThickness="0" Style="{StaticResource MetroFadingButton}" >
-        	<Image Margin="0" Source="/Resources/MetroIcon Trash.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Effect="{StaticResource DropShadow}"/>      
+        	<Image Margin="0" Source="/Resources/Images/MetroIcon Trash.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None" Effect="{StaticResource DropShadow}"/>      
 		</Button>
         <sdk:Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Are you sure you want to delete this Alarm? It cannot be recovered." FontFamily="{StaticResource ThinFont}" FontWeight="Normal" FontSize="13"/>
     </Grid>

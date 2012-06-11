@@ -16,6 +16,19 @@ namespace MetroAlarm
 		public int page = 0;
 		private ObservableCollection<Classes.Alarm> Alarms;
 
+        public Color hiddenColor
+        {
+            get
+            {
+                return ((Classes.ColorResourceWrapper)Application.Current.Resources["Hinting"]).Color;
+            }
+
+            set
+            {
+                ((Classes.ColorResourceWrapper)Application.Current.Resources["Hinting"]).Color = value;
+            }
+        }
+
 		public MainPage()
 		{
 			InitializeComponent();
@@ -39,18 +52,32 @@ namespace MetroAlarm
 
 			AlarmFrame.DataContext = Alarms;
 
+            Storyboard.SetTarget(ColorAnim, (Classes.ColorResourceWrapper)Application.Current.Resources["Hinting"]);
+
             System.Windows.Threading.DispatcherTimer Checker = new System.Windows.Threading.DispatcherTimer();
-            Checker.Interval = new TimeSpan(0, 0, 31);
+            Checker.Interval = new TimeSpan(0, 0, 1);
             Checker.Tick += Checker_Tick;
             Checker.Start();
 		}
 
         void Checker_Tick(object sender, EventArgs e)
         {
+            if ((sender as System.Windows.Threading.DispatcherTimer).Interval.Seconds == 1)
+            {
+                if (DateTime.Now.Second == 0)
+                    (sender as System.Windows.Threading.DispatcherTimer).Interval = new TimeSpan(0, 0, 60);
+                else
+                    return;
+            }
+
             foreach (Classes.Alarm alarm in Alarms)
             {
                 if (alarm.Enabled && alarm.AlarmTime.Hour == DateTime.Now.Hour && alarm.AlarmTime.Minute == DateTime.Now.Minute)
-                    alarm.Desc += "Alarm!";
+                {
+                    Controls.AlarmSound AS = new Controls.AlarmSound();
+                    AS.DataContext = alarm;
+                    AS.Show();
+                }
             }
         }
 
@@ -193,10 +220,20 @@ namespace MetroAlarm
 
 		#endregion
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ColorCheckBox_CheckChanged(object sender, System.EventArgs e)
         {
-            ((Classes.ColorResourceWrapper)Application.Current.Resources["Hinting"]).Color = Colors.Gray;
-            //ChangeColorStoryboard.Begin();
+            try
+            {
+                foreach (Controls.ColorCheckBox chkBx in AccentColorBoxes.Children)
+                {
+                    if (chkBx != sender && chkBx.IsChecked == true)
+                        chkBx.SetIsCheckedSilent(false);
+                }
+                ColorFade.SkipToFill();
+                ColorAnim.To = ((sender as Controls.ColorCheckBox).Background as SolidColorBrush).Color;
+                ColorFade.Begin();
+            }
+            catch { }
         }
 	}
 }
