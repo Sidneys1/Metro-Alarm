@@ -236,18 +236,6 @@
     <Resource Include="Resources\Audio\beeper.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Content Include="Resources\Icons\ico128.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\ico16.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\ico32.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Icons\ico48.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\Images\MetroIcon Pencil.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -274,6 +262,33 @@
     <None Include="Resources\Images\MetroIcon Check.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Icons\MetroIcon Alarm_128.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\MetroIcon Alarm_16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\MetroIcon Alarm_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\MetroIcon Alarm_48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Images\MetroIcon Calendar-Day.png" />
+    <Resource Include="Resources\Images\MetroIcon Calendar-Month.png" />
+    <Resource Include="Resources\Images\MetroIcon Calendar-Week.png" />
+    <Resource Include="Resources\Images\MetroIcon DayOfWeek-Friday.png" />
+    <Resource Include="Resources\Images\MetroIcon DayOfWeek-Monday.png" />
+    <Resource Include="Resources\Images\MetroIcon DayOfWeek-Saturday.png" />
+    <Resource Include="Resources\Images\MetroIcon DayOfWeek-Sunday.png" />
+    <Resource Include="Resources\Images\MetroIcon DayOfWeek-Thursday.png" />
+    <Resource Include="Resources\Images\MetroIcon DayOfWeek-Tuesday.png" />
+    <Resource Include="Resources\Images\MetroIcon DayOfWeek-Wednesday.png" />
+    <Resource Include="Resources\Images\MetroIcon Duplicate.png" />
+    <Resource Include="Resources\Images\MetroIcon Repeat-Twice - Dropdown.png" />
+    <Resource Include="Resources\Images\MetroIcon Work.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

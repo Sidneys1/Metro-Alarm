@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
@@ -13,7 +10,9 @@ namespace MetroAlarm.Controls
 	public partial class AlarmView : UserControl
 	{
 		public event EventHandler<Classes.AlarmArgs> RemoveAlarm;
+
         BlurEffect blur = (BlurEffect)Application.Current.Resources["BlurEffect"];
+
 		public AlarmView()
 		{
 			InitializeComponent();

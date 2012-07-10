@@ -7,9 +7,9 @@
     <SecuritySettings ElevatedPermissions="Required" />
   </OutOfBrowserSettings.SecuritySettings>
   <OutOfBrowserSettings.Icons>
-    <Icon Size="16,16">Resources/Icons/ico16.png</Icon>
-    <Icon Size="32,32">Resources/Icons/ico32.png</Icon>
-    <Icon Size="48,48">Resources/Icons/ico48.png</Icon>
-    <Icon Size="128,128">Resources/Icons/ico128.png</Icon>
+    <Icon Size="16,16">Resources/Icons/MetroIcon Alarm_16.png</Icon>
+    <Icon Size="32,32">Resources/Icons/MetroIcon Alarm_32.png</Icon>
+    <Icon Size="48,48">Resources/Icons/MetroIcon Alarm_48.png</Icon>
+    <Icon Size="128,128">Resources/Icons/MetroIcon Alarm_128.png</Icon>
   </OutOfBrowserSettings.Icons>
 </OutOfBrowserSettings>
